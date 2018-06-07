@@ -1,11 +1,15 @@
 @charset "utf-8";
 /* CSS Document */
 
+
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+	/*font-size: 10pt;*/
+    font-size: calc(16px + 0.5vw);
 	color: #333;
-	line-height: 1.5;
+	/*line-height: 1.5;*/
+    line-height: calc(1.1em + 0.5vw);
+    margin: .5em;
 }
 body {
 	background-color: #fdfdfd;
