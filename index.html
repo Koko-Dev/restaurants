@@ -10,43 +10,68 @@
 
 <body>
   
+  <!--Beginning header-->
   <header>
+    
+    <!--Beginning nav-->
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
-    </nav>
-  </header>
-
+    </nav>  <!--End nav-->
+  </header>       <!--End header-->
+  
+  <!--Beginning main-->
   <main id="maincontent">
     
+    <!--Beginning map-container-->
     <section id="map-container">
       <div id="map"></div>
-    </section>
+    </section>   <!--End map-container-->
     
+    <!--Beginning section-->
     <section>
       
+      <!--Beginning div.filter-options-->
       <div class="filter-options">
         <h2>Filter Results</h2>
+        
+        <!--Beginning select#neighborhoods-select-->
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-          <option value="all">All Neighborhoods</option>
-        </select>
+          
+          <!--Beginning select#neighborhoods-select option-->
+          <option value="all" role="option">
+            All Neighborhoods
+          </option>    <!--End select#neighborhoods-select option-->
+          
+        </select>    <!--End select#neighborhoods-select-->
+        
+        <!--Beginning div select#cuisines-select-->
         <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-          <option value="all">All Cuisines</option>
-        </select>
-      </div>
+          
+          <!--Beginning div select#cuisines-select option-->
+          <option value="all" role="option">
+            All Cuisines
+          </option>    <!--End iv select#cuisines-select option-->
+          
+        </select>    <!--End div select#cuisines-select-->
+        
+      </div>    <!--End div.filter-options-->
       
+      <!--Beginning ul#restaurants-lists-->
       <ul id="restaurants-list"></ul>
-    </section>
+    </section>    <!--End section-->
     
-  </main>
+  </main>   <!--End main-->
+  
 
+  <!--Beginning Footer-->
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
-  </footer>
+  </footer>   <!--End Footer-->
   
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   
-  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>-->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
 
 </body>
 
