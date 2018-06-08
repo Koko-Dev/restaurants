@@ -1,48 +1,60 @@
 @charset "utf-8";
 /* CSS Document */
 
+html {
+  font-size: 17px;
+}
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
-	/*font-size: 10pt;*/
-    font-size: calc(16px + 0.5vw);
+    font-size: 1rem;
 	color: #333;
-	/*line-height: 1.5;*/
     line-height: calc(1.1em + 0.5vw);
-    margin: .5em;
 }
+
 body {
 	background-color: #fdfdfd;
 	margin: 0;
 	position:relative;
+    
 }
+
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
-	/*font-size: 10pt;*/
+    font-size: .83em;
 	color: #333;
+    
 }
+
 a {
 	color: orange;
 	text-decoration: none;
 }
+
 a:hover, a:focus {
 	color: #3397db;
 	text-decoration: none;
 }
+
 a img{
 	border: none 0px #fff;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 0 20px;
 }
+
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
+  font-size: 1rem;
 }
+
 #footer {
   background-color: #444;
   color: #aaa;
@@ -50,17 +62,23 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
-  text-transform: uppercase;
+  text-transform: uppercase
+  font-size: .83rem;
+  width: 100%;
+  outline: 2px red solid;
 }
 /* ====================== Navigation ====================== */
 nav {
+  box-sizing: border-box;
   width: 100%;
-  height: 80px;
+  padding: 2em;
   background-color: #252831;
   text-align:center;
+  
 }
 nav h1 {
   margin: auto;
+  line-height: 1.2em;
 }
 nav h1 a {
   color: #fff;
@@ -68,6 +86,7 @@ nav h1 a {
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
+  padding-top: 2em;
 }
 #breadcrumb {
     padding: 10px 40px 16px;
@@ -113,11 +132,14 @@ nav h1 a {
   height: 50px;
   background-color: #3397DB;
   align-items: center;
+  font-size: 1rem;
+  
+  max-height: 100%;
 }
 
 .filter-options h2 {
   color: white;
-  font-size: 1rem;
+  font-size: 1.2em;
   font-weight: normal;
   line-height: 1;
   margin: 0 20px;
@@ -147,6 +169,14 @@ nav h1 a {
   margin: 0;
   padding: 30px 15px 60px;
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  
+  
+
+  
 }
 #restaurants-list li {
   background-color: #fff;
