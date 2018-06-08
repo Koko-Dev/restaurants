@@ -37,7 +37,7 @@ a:hover, a:focus {
 }
 
 a img{
-	border: none 0px #fff;
+	border: none 0  #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,10 +62,9 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
-  text-transform: uppercase
+  text-transform: uppercase;
   font-size: .83rem;
   width: 100%;
-  outline: 2px red solid;
 }
 /* ====================== Navigation ====================== */
 nav {
@@ -174,9 +173,6 @@ nav h1 a {
   grid-row-gap: 20px;
   grid-column-gap: 20px;
   
-  
-
-  
 }
 #restaurants-list li {
   background-color: #fff;
@@ -263,7 +259,7 @@ nav h1 a {
 }
 #restaurant-address {
   /*font-size: 12pt;*/
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 #restaurant-cuisine {
   background-color: #333;
@@ -275,7 +271,7 @@ nav h1 a {
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+  width: 90%;
 }
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
