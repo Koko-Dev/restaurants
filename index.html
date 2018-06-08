@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  
   <header>
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
@@ -16,10 +17,13 @@
   </header>
 
   <main id="maincontent">
+    
     <section id="map-container">
       <div id="map"></div>
     </section>
+    
     <section>
+      
       <div class="filter-options">
         <h2>Filter Results</h2>
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
@@ -29,19 +33,20 @@
           <option value="all">All Cuisines</option>
         </select>
       </div>
+      
       <ul id="restaurants-list"></ul>
     </section>
+    
   </main>
-
-  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD60feQxLruny7ZQXrkCPI43VFNztSlqeE&libraries=places&callback=initMap"></script>
-  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>-->
-
 
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
+  
+  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
+  <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+  
+  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>-->
 
 </body>
 
