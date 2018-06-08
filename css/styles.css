@@ -16,14 +16,12 @@ body {
 	background-color: #fdfdfd;
 	margin: 0;
 	position:relative;
-    
 }
 
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
     font-size: .83em;
 	color: #333;
-    
 }
 
 a {
@@ -58,7 +56,6 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 #footer {
   background-color: #444;
   color: #aaa;
-  /*font-size: 8pt;*/
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
@@ -66,6 +63,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   font-size: .83rem;
   width: 100%;
 }
+
 /* ====================== Navigation ====================== */
 nav {
   box-sizing: border-box;
@@ -81,7 +79,6 @@ nav h1 {
 }
 nav h1 a {
   color: #fff;
-  /*font-size: 14pt;*/
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
@@ -147,7 +144,6 @@ nav h1 a {
   background-color: white;
   border: 1px solid #fff;
   font-family: Arial,sans-serif;
-  /*font-size: 11pt;*/
   font-size: calc(14px + .5vw);
   height: 35px;
   letter-spacing: 0;
@@ -204,7 +200,6 @@ nav h1 a {
 }
 #restaurants-list p {
   margin: 0;
-  /*font-size: 11pt;*/
 }
 #restaurants-list li a {
   background-color: orange;
@@ -247,7 +242,6 @@ nav h1 a {
 #restaurant-name {
   color: #f18200;
   font-family: Arial,sans-serif;
-  /*font-size: 20pt;*/
   font-weight: 200;
   letter-spacing: 0;
   margin: 15px 0 30px;
@@ -258,13 +252,11 @@ nav h1 a {
 	width: 90%;
 }
 #restaurant-address {
-  /*font-size: 12pt;*/
   margin: 10px 0;
 }
 #restaurant-cuisine {
   background-color: #333;
   color: #ddd;
-  /*font-size: 12pt;*/
   font-weight: 300;
   letter-spacing: 10px;
   margin: 0 0 20px;
@@ -284,7 +276,6 @@ nav h1 a {
 }
 #reviews-container h2 {
   color: #f58500;
-  /*font-size: 24pt;*/
   font-weight: 300;
   letter-spacing: -1px;
   padding-bottom: 1pt;
@@ -295,7 +286,7 @@ nav h1 a {
 }
 #reviews-list li {
   background-color: #fff;
-    border: 2px solid #f3f3f3;
+  border: 2px solid #f3f3f3;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
