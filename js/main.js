@@ -4,6 +4,11 @@ let restaurants,
 var map
 var markers = []
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+  console.log('From main.js:  service worker is registered');
+}
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -81,7 +86,7 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-}
+};
 
 /**
  * Update page and map for current restaurants.
@@ -142,8 +147,11 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.setAttribute('alt','Image of the ' + restaurant.name + ' restaurant');
+  image.setAttribute('alt',restaurant.name );
   li.append(image);
+  
+  const div = document.createElement('div');
+  li.append(div);
   
   const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
@@ -157,9 +165,22 @@ createRestaurantHTML = (restaurant) => {
   address.innerHTML = restaurant.address;
   li.append(address);
   
-  const more = document.createElement('a');
+  const more = document.createElement('button');
   more.innerHTML = 'View Details';
-  more.href = DBHelper.urlForRestaurant(restaurant);
+  /*more.href = DBHelper.urlForRestaurant(restaurant);*/
+  
+  more.onclick = () => {
+    const url = DBHelper.urlForRestaurant(restaurant);
+    window.location = url;
+  };
+  
+  more.style.color = "#fff";
+  more.style.backgroundColor = '#bf780d';
+  more.style.padding = '10px 15px 10px 15px';
+  more.style.fontSize = "1.5em";
+  more.style.marginTop = '1em';
+  more.style.borderRadius = '10px';
+  
   li.append(more);
   
   return li;
