@@ -25,8 +25,8 @@
   <main id="maincontent">
     
     <!--Beginning map-container-->
-    <section id="map-container" aria-hidden="true">
-      <div id="map" aria-hidden="true"></div>
+    <section id="map-container" role="application" aria-labelledby="map-container maincontent" aria-hidden="true">
+      <div id="map"></div>
     </section>
 
     <!--Beginning section-->
@@ -40,7 +40,7 @@
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
           
           <!--Beginning select#neighborhoods-select option-->
-          <option value="all" role="option" aria-label="All Neighborhoods options">
+          <option value="all" role="option" aria-labelledby="All-Neighborhoods-options">
             All Neighborhoods
           </option>   
           
@@ -50,7 +50,7 @@
         <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
           
           <!--Beginning div select#cuisines-select option-->
-          <option value="all" role="option" aria-label="All Cuisine options">
+          <option value="all" role="option" aria-labelledby="All-Cuisines-options">
             All Cuisines
           </option>
           
@@ -60,7 +60,7 @@
 
       <!--Beginning ul#restaurants-lists-->
       <ul id="restaurants-list"></ul>
-	    
+      
     </section>    <!--End section-->
     
   </main>   <!--End main-->
@@ -74,7 +74,7 @@
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   
-  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>-->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
   
   
 </body>

@@ -17,7 +17,7 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
+    <ul id="breadcrumb" aria-labelledby="reviews-list" >
       <li>
         <a href="/">Home</a>
       </li>
@@ -31,7 +31,7 @@
   <main id="maincontent">
     <!-- Beginning map -->
     <section id="map-container">
-      <div id="map"></div>
+      <div id="map" aria-labelledby="map-container"></div>
     </section>
 
     <!-- Beginning restaurant -->
@@ -62,7 +62,9 @@
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Google Maps -->
-  <!--<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>-->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
+  
+  
   
 </body>
 
