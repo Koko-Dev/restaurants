@@ -63,7 +63,7 @@ fetchCuisines = () => {
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
-
+  
   cuisines.forEach(cuisine => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
@@ -94,13 +94,13 @@ window.initMap = () => {
 updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
-
+  
   const cIndex = cSelect.selectedIndex;
   const nIndex = nSelect.selectedIndex;
-
+  
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
-
+  
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
       console.error(error);
@@ -119,7 +119,7 @@ resetRestaurants = (restaurants) => {
   self.restaurants = [];
   const ul = document.getElementById('restaurants-list');
   ul.innerHTML = '';
-
+  
   // Remove all map markers
   self.markers.forEach(m => m.setMap(null));
   self.markers = [];
@@ -146,7 +146,10 @@ createRestaurantHTML = (restaurant) => {
   
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  let imgURL = restaurant.photograph;
+  image.src = `/img/1x-${imgURL}`;
+  image.srcset =  `/img/1x-${imgURL} 300w, 2x-${imgURL} 600w`;
+  
   image.setAttribute('alt',restaurant.name );
   li.append(image);
   
@@ -198,4 +201,4 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     });
     self.markers.push(marker);
   });
-}
+};
