@@ -22,7 +22,7 @@ body {
 ul,
 li {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
+    font-size: 16px;
     color: #333;
 }
 a {
@@ -223,8 +223,9 @@ nav h1 a {
     z-index: 1000;
 }
 .inside #map-container {
-    background: blue none repeat scroll 0 0;
+    background: #ccc none repeat scroll 0 0;
     height: 200px;
+    margin-top: 12%;
     /*position: fixed;
     right: 0;
     top: 80px;
@@ -265,7 +266,7 @@ nav h1 a {
     letter-spacing: 10px;
     margin: 0 0 20px;
     padding: 2px 0;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
     width: 90%;
 }
