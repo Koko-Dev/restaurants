@@ -314,7 +314,7 @@ nav h1 a {
     color: #666;
 }
 
-@media only screen and (max-width: 710px) {
+/*@media only screen and (max-width: 710px) {
     #restaurants-list {
         max-width: 100%;
     }
@@ -331,5 +331,5 @@ nav h1 a {
         max-width: 300px;
         
     }
-}
+}*/
 
