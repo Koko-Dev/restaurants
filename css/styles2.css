@@ -69,7 +69,7 @@ section {
 }
 #footer {
     background-color: #444;
-    color: #aaa;
+    color: #ccc;
     font-size: 14px;
     letter-spacing: 1px;
     padding: 25px;
@@ -130,7 +130,7 @@ nav h1 a {
 #map {
     height: 400px;
     width: 100%;
-    background-color: #ccc;
+    /*background-color: #ccc;*/
 }
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
@@ -295,6 +295,8 @@ nav h1 a {
 #reviews-list {
     margin: 0;
     padding: 0;
+    position: relative;
+    right: 40px;
 }
 #reviews-list li {
     background-color: #fff;
