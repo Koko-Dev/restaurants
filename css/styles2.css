@@ -224,7 +224,7 @@ nav h1 a {
     z-index: 1000;
 }
 .inside #map-container {
-    background: #ccc none repeat scroll 0 0;
+    background: blue none repeat scroll 0 0;
     height: 240px;
     
 }
