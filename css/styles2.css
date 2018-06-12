@@ -144,6 +144,9 @@ nav h1 a {
     font-weight: normal;
     line-height: 1;
     margin: 0 20px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    
 }
 .filter-options select {
     background-color: white;
@@ -152,8 +155,8 @@ nav h1 a {
     font-size: 11pt;
     height: 35px;
     letter-spacing: 0;
-    margin: 10px;
-    padding: 0 10px;
+    margin: 1.2%;
+    padding: 0 1%;
     width: 200px;
 }
 
