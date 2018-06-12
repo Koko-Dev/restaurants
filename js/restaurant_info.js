@@ -147,9 +147,13 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
+  const aTag = document.createElement('a');
+  aTag.href = window.location;
+  aTag.setAttribute('aria-current', 'page');
   li.innerHTML = restaurant.name;
+  li.appendChild(aTag);
   breadcrumb.appendChild(li);
-}
+};
 
 /**
  * Get a parameter by name from page URL.
