@@ -151,7 +151,7 @@ createRestaurantHTML = (restaurant) => {
   image.srcset = `/img/1x-${imgUrl} 300w, /img/2x-${imgUrl} 600w`;
   image.sizes = "(max-width: 300px), (min-width: 600px)";
   
-  image.setAttribute('alt',restaurant.name );
+  image.setAttribute('alt',`An image of ${restaurant.description} in ${restaurant.name}'s restaurant`);
   li.append(image);
   
   const div = document.createElement('div');
