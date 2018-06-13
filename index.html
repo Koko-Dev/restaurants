@@ -33,36 +33,37 @@
       
       <!--Beginning div.filter-options-->
       <div class="filter-options">
-        <h2>Filter Results</h2>
+        <div class="content-container">
+          <h2>Filter Results</h2>
   
-        <!--Beginning select#neighborhoods-select-->
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
-          
-          <!--Beginning select#neighborhoods-select option-->
-          <option value="all" role="option" aria-label="All Neighborhoods options">
-            All Neighborhoods
-          </option>   
-          
-        </select>
+          <!--Beginning select#neighborhoods-select-->
+          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+            
+            <!--Beginning select#neighborhoods-select option-->
+            <option value="all" role="option" aria-label="All Neighborhoods options">
+              All Neighborhoods
+            </option>
+            
+          </select>
   
-        <!--Beginning div select#cuisines-select-->
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
-          
-          <!--Beginning div select#cuisines-select option-->
-          <option value="all" role="option" aria-labelledby="All-Cuisines-options">
-            All Cuisines
-          </option>
-          
-        </select>
-        
+          <!--Beginning div select#cuisines-select-->
+          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+            
+            <!--Beginning div select#cuisines-select option-->
+            <option value="all" role="option" aria-labelledby="All-Cuisines-options">
+              All Cuisines
+            </option>
+            
+          </select>
+        </div>
       </div>
-
-      <!--Beginning ul#restaurants-lists-->
-      <ul id="restaurants-list"></ul>
-      
-    </section>    <!--End section-->
+      <div class="content-container">
+        <!--Beginning ul#restaurants-lists-->
+        <ul id="restaurants-list"></ul>
+      </div>
     
-  </main>   <!--End main-->
+    </section>
+  </main><!--End main-->
 
   <!--Beginning Footer-->
   <footer id="footer">
@@ -73,6 +74,7 @@
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   
    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script>
+  
  
   
   
