@@ -143,7 +143,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
-  let imgUrl = restaurant.photograph;
+  let imgUrl = `${restaurant.photograph}.jpg`;
   
   const image = document.createElement('img');
   image.className = 'restaurant-img';
