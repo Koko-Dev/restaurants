@@ -17,17 +17,18 @@ class DBHelper {
    */
   static fetchRestaurants(callback) {
   
-    fetch(DBHelper.DATABASE_URL).then(response => {
+    fetch(DBHelper.DATABASE_URL, {credentials:'same-origin'})
+      .then(response => {
+        console.log('DBHelper.js response before .json:', response.clone());
       return response.json();
     }).then(restaurants => {
       // This is where you need to get too
-      console.log(restaurants);
+      console.log('DBHelper.js response with json()):', restaurants);
       callback(null, restaurants);
     }).catch(error => {
       // handle errors here
       console.log('Error with DBHelper.DATABASE_URL', error)
     })
-  
   }
   
   /*let xhr = new XMLHttpRequest();
