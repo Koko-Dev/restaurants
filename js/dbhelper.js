@@ -2,7 +2,7 @@
  * Common database helper functions.
  */
 class DBHelper {
-
+  
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -11,24 +11,23 @@ class DBHelper {
     const port = 1337; // Change this to your server port
     return `http://localhost:${port}/restaurants`;
   }
-
+  
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-  
-    fetch(DBHelper.DATABASE_URL, {credentials:'same-origin'})
-      .then(response => {
-        console.log('DBHelper.js response before .json:', response.clone());
+    
+    fetch(DBHelper.DATABASE_URL).then(response => {
       return response.json();
     }).then(restaurants => {
       // This is where you need to get too
-      console.log('DBHelper.js response with json()):', restaurants);
+      console.log(restaurants);
       callback(null, restaurants);
     }).catch(error => {
       // handle errors here
       console.log('Error with DBHelper.DATABASE_URL', error)
     })
+    
   }
   
   /*let xhr = new XMLHttpRequest();
@@ -44,7 +43,7 @@ class DBHelper {
    }
    };
    xhr.send();*/
-
+  
   /**
    * Fetch a restaurant by its ID.
    */
@@ -63,7 +62,7 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
@@ -79,7 +78,7 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
    */
@@ -95,7 +94,7 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
    */
@@ -116,7 +115,7 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Fetch all neighborhoods with proper error handling.
    */
@@ -134,7 +133,7 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Fetch all cuisines with proper error handling.
    */
@@ -152,21 +151,21 @@ class DBHelper {
       }
     });
   }
-
+  
   /**
    * Restaurant page URL.
    */
   static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
   }
-
+  
   /**
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.photograph}`);
   }
-
+  
   /**
    * Map marker for a restaurant.
    */
@@ -180,5 +179,5 @@ class DBHelper {
     );
     return marker;
   }
-
+  
 }

@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-73';
+var staticCacheName = 'restaurants-91';
 
 self.addEventListener('install', event => {
   event.waitUntil(
