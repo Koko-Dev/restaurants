@@ -1,9 +1,8 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
+const htmlmin = require('htmlmin');
+const cleanCss = require('clean-css');
+const uglify = require('gulp-uglify-es').default;
+const del = require('del');
+const pump =require('pump');
+const runSequence = require('run-sequence');
 
-
-gulp.task('default', defaultTask);
-
-function defaultTask(done) {
-  // place code for your default task here
-  done();
-}
