@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-103';
+var staticCacheName = 'restaurants-105';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -6,12 +6,13 @@ var cacheURLs = [
   '/css/styles2.css',
   '/restaurant.html',
   '/js/dbhelper.js',
+  '/js/register.js',
   '/js/idb.js',
-  '/restaurant_info.js',
+  '/js/restaurant_info.js',
   '/img/1.jpg',
   '/img/2.jpg',
   '/img/3.jpg',
-  'img/4.jpg',
+  '/img/4.jpg',
   '/img/5.jpg',
   '/img/6.jpg',
   '/img/7.jpg',
