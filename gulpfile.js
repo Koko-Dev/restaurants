@@ -13,15 +13,15 @@ gulp.task('clean', function() {
 
 gulp.task('html', function () {
   return gulp.src('src/*.html')
-     .pipe(htmlmin({ collapseWhitespace: true }))
-     .pipe(gulp.dest('dist'))
+             .pipe(htmlmin({ collapseWhitespace: true }))
+             .pipe(gulp.dest('dist'))
 });
 
 
 gulp.task('minify-css', function() {
   return gulp.src('src/css/*.css')
-    .pipe(cleanCss())
-    .pipe(gulp.dest('dist/css'))
+             .pipe(cleanCss())
+             .pipe(gulp.dest('dist/css'))
 });
 
 gulp.task('img', function () {
@@ -48,10 +48,10 @@ gulp.task('js', function (cb) {
 
 gulp.task('sw', function(cb) {
   pump([
-    gulp.src('src/sw.js'),
-    uglify(),
-    gulp.dest('dist')
-  ],
+      gulp.src('src/sw.js'),
+      uglify(),
+      gulp.dest('dist')
+    ],
     cb
   );
 });

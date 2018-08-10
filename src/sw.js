@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-93';
+var staticCacheName = 'restaurants-94';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -47,7 +47,8 @@ self.addEventListener('activate', event => {
   )
 });
 
-self.addEventListener('fetch', event => {
+
+/*self.addEventListener('fetch', event => {
   event.respondWith(
     fetch(event.request)
       .then(networkResponse => {
@@ -62,10 +63,10 @@ self.addEventListener('fetch', event => {
           })
       })
   )
-});
+});*/
 
 
-/*self.addEventListener('fetch', event => {
+self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       if(response) {
@@ -90,7 +91,7 @@ self.addEventListener('fetch', event => {
         return;
       })
   )
-});*/
+});
 
 
 
