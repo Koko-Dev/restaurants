@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-92';
+var staticCacheName = 'restaurants-93';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -7,26 +7,26 @@ self.addEventListener('install', event => {
             return cache
               .addAll([
                 '/',
-                '/index.html',
-                '/js/main.js',
-                '/css/styles.css',
-                '/restaurant.html',
-                '/js/dbhelper.js',
-                '/restaurant_info.js',
-                '/data/restaurants.json',
-                '/img/1.jpg',
-                '/img/2.jpg',
-                '/img/3.jpg',
-                '/img/4.jpg',
-                '/img/5.jpg',
-                '/img/6.jpg',
-                '/img/7.jpg',
-                '/img/8.jpg',
-                '/img/9.jpg',
-                '/img/10.jpg',
+                'index.html',
+                'js/main.js',
+                'css/styles2.css',
+                'restaurant.html',
+                'js/dbhelper.js',
+                'js/idb.js',
+                'restaurant_info.js',
+                'img/1.jpg',
+                'img/2.jpg',
+                'img/3.jpg',
+                'img/4.jpg',
+                'img/5.jpg',
+                'img/6.jpg',
+                'img/7.jpg',
+                'img/8.jpg',
+                'img/9.jpg',
+                'img/10.jpg',
               ])
               .catch(error => {
-                console.log('Cache addAl from sw.js failed', error);
+                console.log('Cache addAll from sw.js failed', error);
               })
           })
   )
@@ -47,8 +47,25 @@ self.addEventListener('activate', event => {
   )
 });
 
-
 self.addEventListener('fetch', event => {
+  event.respondWith(
+    fetch(event.request)
+      .then(networkResponse => {
+        return caches.open(staticCacheName)
+          .then((cache) => {
+            cache.put(event.request, response.clone());
+            return networkResponse;
+          })
+          .catch(error => {
+            console.log('[Service Worker]: Error in in fetch event');
+            return caches.match(event.request);
+          })
+      })
+  )
+});
+
+
+/*self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       if(response) {
@@ -73,7 +90,7 @@ self.addEventListener('fetch', event => {
         return;
       })
   )
-});
+});*/
 
 
 

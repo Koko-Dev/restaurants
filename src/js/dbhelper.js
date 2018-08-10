@@ -1,3 +1,12 @@
+let dbPromise = idb.open('restaurant-info', 1, upgradeDb => {
+  switch(upgradeDb.oldVersion) {
+    case 0:
+      // placeholder
+    case 1:
+      upgradeDb.createObjectStore('restaurant-info', {keyPath: 'id'})
+  }
+});
+
 /**
  * Common database helper functions.
  */
@@ -15,7 +24,28 @@ class DBHelper {
   /**
    * Fetch all restaurants.
    */
+  
   static fetchRestaurants(callback) {
+    fetch(DBHelper.DATABASE_URL)
+      .then(response => {
+        return response.json();
+      })
+      .then(restaurants => {
+        dbPromise.then(db => {
+          let tx = db.transaction('restaurant-info', 'readwrite');
+          let store = tx.objectStore('restaurant-info');
+          restaurants.forEach(restaurant => {
+            store.put(restaurant);
+          });
+          callback(null, restaurants);
+        })
+      })
+      .catch(error => {
+        console.log("[dbhelper] Error with populating indexedDB");
+      })
+  }
+  
+/*  static fetchRestaurants(callback) {
     
     fetch(DBHelper.DATABASE_URL).then(response => {
       return response.json();
@@ -28,7 +58,7 @@ class DBHelper {
       console.log('Error with DBHelper.DATABASE_URL', error)
     })
     
-  }
+  }*/
   
   /*let xhr = new XMLHttpRequest();
    xhr.open('GET', DBHelper.DATABASE_URL);
