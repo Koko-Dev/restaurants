@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-101';
+var staticCacheName = 'restaurants-103';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -30,15 +30,13 @@ self.addEventListener('install', event => {
   )
 });
 
-
-
 self.addEventListener('activate', event => {
   console.log('[Service Worker] At Activate Event')
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if(cacheName !== staticCacheName && cacheName.startsWith('restaurants-')) {
+          if(staticCacheName.indexOf(cacheName) === -1) {
             return caches.delete(cacheName);
           }
         })

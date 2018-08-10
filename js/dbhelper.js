@@ -1,3 +1,7 @@
+if (typeof idb === "undefined") {
+  self.importScripts('js/idb.js');
+}
+
 let dbPromise = idb.open('restaurant-info', 1, upgradeDb => {
   switch(upgradeDb.oldVersion) {
     case 0:
