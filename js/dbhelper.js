@@ -24,7 +24,7 @@ class DBHelper {
   /**
    * open cache
    **/
-  static get IDB() {
+  static get openIDB() {
     // Does the Browser Support the Service Worker?
     if(!navigator.serviceWorker) return Promise.resolve();
     
@@ -53,7 +53,7 @@ class DBHelper {
     fetch(this.DATABASE_URL)
       .then(response => response.json())
       .then(restaurants => {
-        this.IDB
+        this.openIDB
             .then( db => {
               const tx = db.transaction(dbObjectStore, 'readwrite'),
               store = tx.objectStore(dbObjectStore);
