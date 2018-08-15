@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-122';
+var staticCacheName = 'restaurants-126';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -18,7 +18,17 @@ var cacheURLs = [
   '/img/7.jpg',
   '/img/8.jpg',
   '/img/9.jpg',
-  '/img/10.jpg'
+  '/img/10.jpg',
+  '/img/2x-1.jpg',
+  '/img/2x-2.jpg',
+  '/img/2x-3.jpg',
+  '/img/2x-4.jpg',
+  '/img/2x-5.jpg',
+  '/img/2x-6.jpg',
+  '/img/2x-7.jpg',
+  '/img/2x-8.jpg',
+  '/img/2x-9.jpg',
+  '/img/2x-10.jpg'
 ];
 
 self.addEventListener('install', event => {
