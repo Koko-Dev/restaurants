@@ -11,7 +11,7 @@ To run application:
   4.  Run by:  `npm start`
 
   As of this point, the Audit reads:
-  ![Lighthouse Audit Results](screenshots/Audit.png "Lighthouse Audit Results")
+  ![Lighthouse Audit Results](Audit.png "Lighthouse Audit Results")
 
   
 
