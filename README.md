@@ -2,22 +2,21 @@
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
-## Project Overview: Stage 1
+## Project Overview: Stage 2:
 
-For this project, please input your own Google Maps API <script> and Key on:
+To run application:
+  1.    download:  https://github.com/Koko-Dev/mws-restaurant-stage2 to populate the restaurant data.
+  2.  Run:  `node app.js`
+  3.  Then download or clone this project https://github.com/Koko-Dev/restaurants
+  4.  Run by:  `npm start`
 
-1.  index.html, line 75
-2.  restaurant.html, line 65
+  As of this point, the Audit reads:
+  ![Lighthouse Audit Results](screenshots/Audit.png "Lighthouse Audit Results")
 
-
-Once you have input your Google Maps API <script> tags and Key, open up a server.
-
-For example:
-
-If you have Python 3:
-```python3 -m http.server 8000```
-
-If you have Python 2:
-```python -m SimpleHTTPServer```
+  
 
 
+
+
+
+                                                         ß
