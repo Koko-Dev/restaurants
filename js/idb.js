@@ -1,3 +1,8 @@
+/*
+* Jake Archibald's IndexedDB with Promises on Github found here:
+* git@github.com:jakearchibald/idb.git
+* */
+
 'use strict';
 
 (function() {
