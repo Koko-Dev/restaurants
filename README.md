@@ -7,10 +7,11 @@
 To run application:
   1. Download or clone:  https://github.com/Koko-Dev/mws-restaurant-stage2 to populate the restaurant data.  Run by:  `node app.js`
   2. Then download or clone this project https://github.com/Koko-Dev/restaurants
-       Run by:  `npm start`
+        a.  Put in your Google Maps API Key in the script tags on `index.html` and `restaurant.html`
+        b.  Run by:  `npm start`
 
-  As of this point, the Audit reads:
-  ![Lighthouse Audit Results](Audit.png "Lighthouse Audit Results")
+
+
 
   
 
