@@ -51,8 +51,59 @@
 
     <!-- Beginning reviews -->
     <section id="reviews-container">
-      <ul id="reviews-list"></ul>
-    </section>
+      <h2 tabindex="0">Add your review</h2>
+      <form id="review-form" role="form">
+        <table>
+          
+          <!--form-username-->
+         <tr>
+           <td class="form-label"><label for="name">Username</label></td>
+          <td>
+            <input type="text" class="form-input" id="name" name="name" required>
+          </td>
+         </tr>
+	        
+	        <tr>
+		        <td class="form-label">
+			        <label for="rating">Rating</label>
+		        </td>
+		         <td>
+			        <select name="rating" class="form-input" id="rating" required>
+				        <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+				        <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+				        <option value="3">&#9733; &#9733; &#9733;</option>
+				        <option value="2">&#9733; &#9733;</option>
+				        <option value="1">&#9733;</option>
+			        </select>
+		        </td>
+	        </tr>
+	        
+	        <tr>
+		        <td class="form-label"><label for="form-comment">Comment</label></td>
+		        <td><textarea name="form-coment"
+		                      id="form-comment"
+		                      class="form-input"></textarea>
+		        </td>
+	        </tr>
+	        <tr>
+		        <td>
+			        <button class="form-send-button"
+			                style="padding: 12px;
+			                margin: 20px auto 30px auto;
+			                border: 1px solid darkblue;
+			                border-radius: 20%;
+											font-weight: 500;
+											font-size: 1.2rem;
+											color: darkblue;
+											background-color: #cccccc;">Post Review</button>
+			        
+		        </td>
+	        </tr>
+	          
+        </table>
+      </form>
+	    <ul id="reviews-list"></ul>
+    </section>      <!-- End reviews>
 
   </main>
   
