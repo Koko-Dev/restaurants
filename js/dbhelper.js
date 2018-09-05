@@ -3,11 +3,14 @@ if (typeof idb === "undefined") {
   self.importScripts('js/idb.js');
 }
 
-// Restaurant Reviews Database Name
+// Restaurant Database Name
 const dbName = 'restaurant-database';
 
-// Name of Particular Restaurant Object Store
+// Name of restaurant-database restaurants object store
 const dbObjectStore = 'restaurants';
+
+// Nave of restaurant-database reviews object store
+const reviewsObjectStore = 'reviews';
 
 /**
  * Common database helper functions.
@@ -43,7 +46,7 @@ class DBHelper {
         case 1:
           upgradeDb.createObjectStore(dbObjectStore, {keyPath: 'id'});
         case 2:
-          const reviewsStore = upgradeDb.createObjectStore('reviews', {keyPath: 'id'});
+          const reviewsStore = upgradeDb.createObjectStore(reviewsObjectStore, {keyPath: 'id'});
           reviewsStore.createIndex('restaurant', 'restaurant_id');
       }
     });
@@ -59,10 +62,10 @@ class DBHelper {
       .then(restaurants => {
         this.openIDB
             .then( db => {
-              const tx = db.transaction(dbObjectStore, 'readwrite'),
-              store = tx.objectStore(dbObjectStore);
+              const tx = db.transaction(dbObjectStore, 'readwrite');
+              const restaurantStore = tx.objectStore(dbObjectStore);
               restaurants.forEach( restaurant => {
-                store.put(restaurant);
+                restaurantStore.put(restaurant);
               });
               callback(null, restaurants);
               return tx.complete;
