@@ -138,7 +138,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
-  let imgUrl = `${restaurant.photograph}.jpg`;
+  let imgUrl = `${restaurant.id}.jpg`;
   
   const image = document.createElement('img');
   image.className = 'restaurant-img';
@@ -146,7 +146,7 @@ createRestaurantHTML = (restaurant) => {
   image.srcset = `/img/1x-${imgUrl} 300w, /img/2x-${imgUrl} 600w`;
   image.sizes = "(max-width: 300px), (min-width: 600px)";
   
-  image.setAttribute('alt',`An image of ${restaurant.description} in ${restaurant.name}'s restaurant`);
+  image.setAttribute('alt',`An image of ${restaurant.name} restaurant in ${restaurant.neighborhood}`);
   li.append(image);
   
   const div = document.createElement('div');
