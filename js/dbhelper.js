@@ -1,4 +1,5 @@
 if (typeof idb === "undefined") {
+  // self.importScripts('js/idb-bundle.min.js');
   self.importScripts('js/idb.js');
 }
 
@@ -34,13 +35,16 @@ class DBHelper {
     }
     
     // Create a Database for the Restaurants
-    const dbPromise = idb.open(dbName, 1, (upgradeDb) => {
+    const dbPromise = idb.open(dbName, 2, (upgradeDb) => {
       // create object store
       switch (upgradeDb.oldVersion) {
         case 0:
           // Placeholder
         case 1:
           upgradeDb.createObjectStore(dbObjectStore, {keyPath: 'id'});
+        case 2:
+          const reviewsStore = upgradeDb.createObjectStore('reviews', {keyPath: 'id'});
+          reviewsStore.createIndex('restaurant', 'restaurant_id');
       }
     });
     return dbPromise;
