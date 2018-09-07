@@ -22,7 +22,7 @@ class DBHelper {
    **/
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}/`;
   }
   
   /**
@@ -34,10 +34,10 @@ class DBHelper {
     
     // Does the Browser Support indexedDB?
     if(!self.indexedDB) {
-      reject("indexedDB is not supported by this Browser");
+      reject("indexedDB is not supported by this Browser");                 
     }
     
-    // Create a Database for the Restaurants
+    // Create a Database for the Restaurants and Reviews
     const dbPromise = idb.open(dbName, 2, (upgradeDb) => {
       // create object store
       switch (upgradeDb.oldVersion) {
@@ -57,7 +57,7 @@ class DBHelper {
    * Fetch and cache all restaurants.
    */
   static fetchRestaurants(callback) {
-    fetch(this.DATABASE_URL)
+    fetch(this.DATABASE_URL + 'restaurants')
       .then(response => response.json())
       .then(restaurants => {
         this.openIDB
