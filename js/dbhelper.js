@@ -223,6 +223,28 @@ class DBHelper {
      );
      return marker;
    }
+   
+   // Updating is_favorite status
+  static favoriteStatusUpdate(restaurantID, favorite_status) {
+    console.log('changing status to: ', favorite_status);
+    
+    fetch(`http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`, {
+      method: 'PUT'
+    })
+      .then(() => {
+        this.openIDB()
+            .then(db => {
+              const tx = db.transaction('restaurants', 'readwrite');
+              const store = tx.objectStore('restaurants');
+              store.get(restaurantID).then(restaurant => {
+                restaurant.is_favorite = favorite_status;
+                store.put(restaurant);
+              })
+            })
+      })
+  }
+  
+//  end DBHelper
 }
 
 self.DBHelper = DBHelper;

@@ -52,17 +52,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
   
-  // Add favorites
-  const favorite = document.createElement('button');
-  favorite.innerHTML = '♥';
-  favorite.classList.add('favorite_button');
-  
-  favorite.onclick = () => {
-    const isFav = !restaurant.is_favorite;
-    
-  };
-  
-  
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
   
@@ -75,7 +64,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   
   image.setAttribute('alt',`An image of ${restaurant.name} restaurant in ${restaurant.neighborhood}`);
   
-  
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
   
@@ -83,9 +71,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+  
   // fill reviews
   fillReviewsHTML();
-}
+};
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.

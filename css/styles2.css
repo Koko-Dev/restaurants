@@ -276,7 +276,6 @@ nav h1 a {
   text-align: center;
   text-transform: uppercase; }
 
-
 #restaurant-container,
 #reviews-container {
   border-bottom: 1px solid #d9d9d9;
@@ -294,16 +293,57 @@ nav h1 a {
   letter-spacing: -1px;
   padding-bottom: 1pt; }
 
+.favorite-heart {
+    display: flex;
+    align-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+/* White Heart Suit alt text from: https://www.alt-codes.net/heart_alt_code.php*/
+.white-heart {
+    font-size: 4em;
+    border: none;
+    color: red;
+}
+
+
+
+/* Heart: https://emojipedia.org/heavy-black-heart/ */
+
+.favButton {
+    font-size: 42px;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #180d00;
+    clear: both;
+    text-align: center;
+}
+.favButton:hover,
+.favButton:focus{
+    background-color: #f7bbd6;
+}
+
+.isFavorite {
+    color: red;
+}
+.isNotFavorite {
+    color: black;
+}
+
+
+
+
 .form-input {
     width: 100%;
     border: 1px solid #4b2900;
-    font-size: 1.2em;                     f
+    font-size: 1.2em;
 }
 
 .form-input option {
     font-size: 2em;
 }
-
 
 .form-label {
     text-align: left;
@@ -319,6 +359,21 @@ nav h1 a {
 .add-review table {
     width: 80%;
     margin: auto;
+}
+
+#rating {
+    border-radius: 10%;
+    color: white;
+    background-color: #180d00;
+    height: 2.7em;
+    margin: 20px;
+    font-weight: 500;
+    width: auto;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.form-send-button {
     
 }
 

@@ -159,11 +159,31 @@ createRestaurantHTML = (restaurant) => {
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
   li.append(neighborhood);
+ 
+  // Add the favorites button, update at endpoint, change class name on click
+  const favorite = document.createElement('button');
+  favorite.classList.add('favButton');
+  
+  favorite.innerHTML = '♥';
+  
+  favorite.onclick = () => {
+    let currentFavStatus = !restaurant.is_favorite;
+    DBHelper.favoriteStatusUpdate(restaurant.id, currentFavStatus);
+    
+  //  Update the class name
+    restaurant.is_favorite = !restaurant.is_favorite;
+    updateFavoriteClassName(favorite, restaurant.is_favorite);
+  };
+  
+  updateFavoriteClassName(favorite, restaurant.is_favorite);
+  li.append(favorite);
+  
   
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
   li.append(address);
   
+  /* View Details button */
   const more = document.createElement('button');
   more.innerHTML = 'View Details';
   /*more.href = DBHelper.urlForRestaurant(restaurant);*/
@@ -172,7 +192,6 @@ createRestaurantHTML = (restaurant) => {
     const url = DBHelper.urlForRestaurant(restaurant);
     window.location = url;
   };
-  
   more.style.color = "#fff";
   more.style.backgroundColor = '#bf780d';
   more.style.padding = '10px 15px 10px 15px';
@@ -183,6 +202,19 @@ createRestaurantHTML = (restaurant) => {
   li.append(more);
   
   return li;
+};
+
+/*  Update the class name to change CSS of favorites heart button */
+updateFavoriteClassName = (theFavButton, theFavStatus) => {
+  if(!theFavStatus) {
+    theFavButton.classList.remove('isFavorite');
+    theFavButton.classList.add('isNotFavorite');
+    theFavButton.setAttribute('aria-label', 'Mark as a favorite restaurant');
+} else {
+    theFavButton.classList.remove('isNotFavorite');
+    theFavButton.classList.add('isFavorite');
+    theFavButton.setAttribute('aria-label', 'Remove as a favorite');
+  }
 };
 
 /**
