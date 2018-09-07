@@ -213,7 +213,7 @@ updateFavoriteClassName = (theFavButton, theFavStatus) => {
 } else {
     theFavButton.classList.remove('isNotFavorite');
     theFavButton.classList.add('isFavorite');
-    theFavButton.setAttribute('aria-label', 'Remove as a favorite');
+    theFavButton.setAttribute('aria-label', 'Remove as a favorite restaurant');
   }
 };
 
