@@ -224,7 +224,11 @@ class DBHelper {
     return marker;
   }
   
-  // Updating is_favorite status
+  // Updating is_favorite status based on user choice of favorite/unfavorite
+  // PUT Endpoints to Favorite or Unfavorite a restaurant
+  // Favorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=true
+  // Unfavorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=false
+  // This will store User choice of favorite or unfavorite in indexedDB for offline-first capability
   static favoriteStatusUpdate(restaurantID, favorite_status) {
     
     const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
@@ -248,8 +252,7 @@ class DBHelper {
             })
       })
   }
-
-//  end DBHelper
-}
+  
+} //  end DBHelper
 
 self.DBHelper = DBHelper;

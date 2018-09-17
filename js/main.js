@@ -170,18 +170,17 @@ createRestaurantHTML = (restaurant) => {
   
   favorite.onclick = () => {
     let currentFavStatus = !restaurant.is_favorite;
+    
+    // 
     DBHelper.favoriteStatusUpdate(restaurant.id, currentFavStatus);
     
-    //  Update the class name
+    //  Update the class name is put in separate function because we call it twice
     restaurant.is_favorite = !restaurant.is_favorite;
     updateFavoriteClassName(favorite, restaurant.is_favorite);
   };
   
   updateFavoriteClassName(favorite, restaurant.is_favorite);
   li.append(favorite);
-  
-  
-  
   
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
