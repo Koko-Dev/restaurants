@@ -134,7 +134,7 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  background-color: #3397DB;
+  background-color: #124264;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
@@ -322,8 +322,8 @@ nav h1 a {
 }
 
 .isFavorite {
-    color: red;
-    background-color: #f7bbd6;
+    color: #88060b;
+    background-color: #fde9f1;
 }
 .isNotFavorite {
     color: black;
