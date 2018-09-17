@@ -25,7 +25,7 @@ fetchNeighborhoods = () => {
     }
   });
 }
-
+                                          
 /**
  * Set neighborhoods HTML.
  */
@@ -212,7 +212,7 @@ updateFavoriteClassName = (theFavButton, theFavStatus) => {
   if(!theFavStatus) {
     theFavButton.classList.remove('isFavorite');
     theFavButton.classList.add('isNotFavorite');
-    theFavButton.setAttribute('aria-label', 'Mark as a favorite restaurant');
+    theFavButton.setAttribute('aria-label', 'Favorite this restaurant');
   } else {
     theFavButton.classList.remove('isNotFavorite');
     theFavButton.classList.add('isFavorite');
