@@ -16,13 +16,13 @@ const reviewsObjectStore = 'reviews';
  * Common database helper functions.
  */
 class DBHelper {
-                                                         
+  
   /**
    * Database URL.
    **/
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/`;
+    return `http://localhost:${port}/restaurants`;
   }
   
   /**
@@ -34,7 +34,7 @@ class DBHelper {
     
     // Does the Browser Support indexedDB?
     if(!self.indexedDB) {
-      reject("indexedDB is not supported by this Browser");                 
+      reject("indexedDB is not supported by this Browser");
     }
     
     // Create a Database for the Restaurants and Reviews
@@ -42,7 +42,7 @@ class DBHelper {
       // create object store
       switch (upgradeDb.oldVersion) {
         case 0:
-          // Placeholder
+        // Placeholder
         case 1:
           upgradeDb.createObjectStore(dbObjectStore, {keyPath: 'id'});
         case 2:
@@ -57,7 +57,7 @@ class DBHelper {
    * Fetch and cache all restaurants.
    */
   static fetchRestaurants(callback) {
-    fetch(this.DATABASE_URL + 'restaurants')
+    fetch(this.DATABASE_URL)
       .then(response => response.json())
       .then(restaurants => {
         this.openIDB
@@ -204,46 +204,51 @@ class DBHelper {
    * Map marker for a restaurant.
    */
   /*static mapMarkerForRestaurant(restaurant, map) {
-    // https://leafletjs.com/reference-1.3.0.html#marker
-    const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
-      {title: restaurant.name,
-        alt: restaurant.name,
-        url: DBHelper.urlForRestaurant(restaurant)
-      })
-    marker.addTo(newMap);
+   // https://leafletjs.com/reference-1.3.0.html#marker
+   const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
+   {title: restaurant.name,
+   alt: restaurant.name,
+   url: DBHelper.urlForRestaurant(restaurant)
+   })
+   marker.addTo(newMap);
+   return marker;
+   }*/
+  static mapMarkerForRestaurant(restaurant, map) {
+    const marker = new google.maps.Marker({
+      position: restaurant.latlng,
+      title: restaurant.name,
+      url: DBHelper.urlForRestaurant(restaurant),
+      map: map,
+      animation: google.maps.Animation.DROP}
+    );
     return marker;
-  }*/
-   static mapMarkerForRestaurant(restaurant, map) {
-     const marker = new google.maps.Marker({
-       position: restaurant.latlng,
-       title: restaurant.name,
-       url: DBHelper.urlForRestaurant(restaurant),
-       map: map,
-       animation: google.maps.Animation.DROP}
-     );
-     return marker;
-   }
-   
-   // Updating is_favorite status
+  }
+  
+  // Updating is_favorite status
   static favoriteStatusUpdate(restaurantID, favorite_status) {
-    console.log('changing status to: ', favorite_status);
     
-    fetch(`http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`, {
-      method: 'PUT'
+    const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
+    let headers = new Headers();
+    headers.set('Accept', 'application/json');
+    
+    fetch(url, {
+      method: 'PUT',
+      headers
     })
       .then(() => {
-        this.openIDB()
+        this.openIDB
             .then(db => {
               const tx = db.transaction('restaurants', 'readwrite');
               const store = tx.objectStore('restaurants');
               store.get(restaurantID).then(restaurant => {
-                restaurant.is_favorite = favorite_status;
+                restaurant.is_favorite = favorite_status.toString();
                 store.put(restaurant);
+                
               })
             })
       })
   }
-  
+
 //  end DBHelper
 }
 

@@ -159,7 +159,9 @@ createRestaurantHTML = (restaurant) => {
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
   li.append(neighborhood);
- 
+  
+  
+  
   // Add the favorites button, update at endpoint, change class name on click
   const favorite = document.createElement('button');
   favorite.classList.add('favButton');
@@ -170,13 +172,15 @@ createRestaurantHTML = (restaurant) => {
     let currentFavStatus = !restaurant.is_favorite;
     DBHelper.favoriteStatusUpdate(restaurant.id, currentFavStatus);
     
-  //  Update the class name
+    //  Update the class name
     restaurant.is_favorite = !restaurant.is_favorite;
     updateFavoriteClassName(favorite, restaurant.is_favorite);
   };
   
   updateFavoriteClassName(favorite, restaurant.is_favorite);
   li.append(favorite);
+  
+  
   
   
   const address = document.createElement('p');
@@ -210,10 +214,10 @@ updateFavoriteClassName = (theFavButton, theFavStatus) => {
     theFavButton.classList.remove('isFavorite');
     theFavButton.classList.add('isNotFavorite');
     theFavButton.setAttribute('aria-label', 'Mark as a favorite restaurant');
-} else {
+  } else {
     theFavButton.classList.remove('isNotFavorite');
     theFavButton.classList.add('isFavorite');
-    theFavButton.setAttribute('aria-label', 'Remove as a favorite restaurant');
+    theFavButton.setAttribute('aria-label', 'Unfavorite this restaurant');
   }
 };
 

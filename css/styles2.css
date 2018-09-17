@@ -305,24 +305,29 @@ nav h1 a {
 /* Heart: https://emojipedia.org/heavy-black-heart/ */
 
 .favButton {
+    align-self: flex-start;
     font-size: 42px;
     width: 100%;
-    background: none;
-    border: none;
+    background: #ffffff;
+    /*border: 1px solid #666666;*/
     color: #180d00;
-    clear: both;
     text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
 }
 .favButton:hover,
 .favButton:focus{
-    background-color: #f7bbd6;
+    background-color: #cccccc;
 }
 
 .isFavorite {
     color: red;
+    background-color: #f7bbd6;
 }
 .isNotFavorite {
     color: black;
+    background-color: #ffffff;
 }
 
 
