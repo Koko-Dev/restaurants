@@ -22,7 +22,7 @@ class DBHelper {
    **/
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}/`;
   }
   
   /**
@@ -38,7 +38,7 @@ class DBHelper {
     }
     
     // Create a Database for the Restaurants and Reviews
-    const dbPromise = idb.open(dbName, 2, (upgradeDb) => {
+    const dbPromise = idb.open(dbName, 3, (upgradeDb) => {
       // create object store
       switch (upgradeDb.oldVersion) {
         case 0:
@@ -48,6 +48,8 @@ class DBHelper {
         case 2:
           const reviewsStore = upgradeDb.createObjectStore(reviewsObjectStore, {keyPath: 'id'});
           reviewsStore.createIndex('restaurant', 'restaurant_id');
+        case 3:
+          upgradeDb.createObjectStore('offline-reviews', {keyPath: 'updatedAt'})
       }
     });
     return dbPromise;
@@ -57,7 +59,7 @@ class DBHelper {
    * Fetch and cache all restaurants.
    */
   static fetchRestaurants(callback) {
-    fetch(this.DATABASE_URL)
+    fetch(this.DATABASE_URL + 'restaurants')
       .then(response => response.json())
       .then(restaurants => {
         this.openIDB
@@ -200,6 +202,57 @@ class DBHelper {
     return (`/img/${restaurant.id}`);
   }
   
+  
+  // Get all reviews for a restaurant first from indexedDB and then from Network GET Endpoint:
+  //     http://localhost:1337/reviews/?restaurant_id=<restaurant_id>
+  static fetchReviews(restaurant, callback) {
+    console.log('In fetchReviews but before openIDB');
+    DBHelper.openIDB
+      .then(db => {
+        if(!db) return;
+        console.log('Reached inside fetchReviews');
+        
+        // First check to see if there are reviews in indexedDB
+        const tx = db.transaction('reviews', 'readwrite');
+        let store = tx.objectStore('reviews');
+        store.getAll().then(reviewsInIDB => {
+          if(reviewsInIDB && reviewsInIDB.length > 0) {
+            console.log('There are reviews in indexedDb')
+            // There are reviews in IndexedDB and we should use those
+            callback(null, reviewsInIDB);
+        } else {
+            // There are no reviews in IndexedDB, so we will fetch with Endpoint
+            fetch(`${DBHelper.DATABASE_URL}reviews/!restaurant_id=${restaurant.id}`)
+              .then(response => {
+                return response.json();
+              })
+              .then(reviewsFromNetwork => {
+                console.log('There are reviews from the network', reviewsFromNetwork);
+                this.openIDB.then(db => {
+                  if(!db) return;
+                  
+                  // Put Reviews from Network into IndexedDB
+                  const tx = db.transaction('reviews', 'readwrite');
+                  let store = tx.objectStore('reviews');
+                  reviewsFromNetwork.forEach(review => {
+                    store.put(review);
+                  })
+                })
+                callback(null,  reviewsFromNetwork)
+              })
+              .catch(error => {
+                // There is an error in fetching reviews from the network
+                callback(error,  null);
+              })
+              
+              
+          }
+        })
+      })
+  }
+ 
+  
+  
   /**
    * Map marker for a restaurant.
    */
@@ -228,7 +281,7 @@ class DBHelper {
   // PUT Endpoints to Favorite or Unfavorite a restaurant
   // Favorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=true
   // Unfavorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=false
-  // This will store User choice of favorite or unfavorite in indexedDB for offline-first capability
+  // This will store User choice if favorite or unfavorite in indexedDB for offline-first capability
   static favoriteStatusUpdate(restaurantID, favorite_status) {
     
     const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
@@ -247,12 +300,10 @@ class DBHelper {
               store.get(restaurantID).then(restaurant => {
                 restaurant.is_favorite = favorite_status.toString();
                 store.put(restaurant);
-                
               })
             })
       })
   }
-  
 } //  end DBHelper
 
 self.DBHelper = DBHelper;
