@@ -137,10 +137,13 @@ class DBHelper {
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
+      console.log('1');
+      console.log(restaurants);
       if (error) {
         callback(error, null);
       } else {
-        let results = restaurants
+        let results = restaurants;
+        
         if (cuisine != 'all') { // filter by cuisine
           results = results.filter(r => r.cuisine_type == cuisine);
         }
@@ -150,6 +153,7 @@ class DBHelper {
         callback(null, results);
       }
     });
+    
   }
   
   /**
@@ -201,56 +205,107 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.id}`);
   }
+
   
-  
-  // Get all reviews for a restaurant first from indexedDB and then from Network GET Endpoint:
-  //     http://localhost:1337/reviews/?restaurant_id=<restaurant_id>
   static fetchReviews(restaurant, callback) {
-    console.log('In fetchReviews but before openIDB');
     DBHelper.openIDB
       .then(db => {
         if(!db) return;
-        console.log('Reached inside fetchReviews');
         
-        // First check to see if there are reviews in indexedDB
-        const tx = db.transaction('reviews', 'readwrite');
+        // Check indexedDB first for reviews
+        const tx = db.transaction('reviews');
         let store = tx.objectStore('reviews');
-        store.getAll().then(reviewsInIDB => {
-          if(reviewsInIDB && reviewsInIDB.length > 0) {
-            console.log('There are reviews in indexedDb')
-            // There are reviews in IndexedDB and we should use those
-            callback(null, reviewsInIDB);
+        store.getAll().then(theReviews => {
+          if(theReviews && theReviews.length > 0) {
+            // Use the reviews from indexedDB
+            callback(null, theReviews);
         } else {
-            // There are no reviews in IndexedDB, so we will fetch with Endpoint
-            fetch(`${DBHelper.DATABASE_URL}reviews/!restaurant_id=${restaurant.id}`)
+            // There are no Reviews in IDB, so fetch them from the Network
+            fetch(`${DBHelper.DATABASE_URL}reviews/?restaurant_id=${restaurant.id}`)
               .then(response => {
-                return response.json();
+                return response.json()
               })
-              .then(reviewsFromNetwork => {
-                console.log('There are reviews from the network', reviewsFromNetwork);
-                this.openIDB.then(db => {
-                  if(!db) return;
-                  
-                  // Put Reviews from Network into IndexedDB
-                  const tx = db.transaction('reviews', 'readwrite');
-                  let store = tx.objectStore('reviews');
-                  reviewsFromNetwork.forEach(review => {
-                    store.put(review);
+              .then(reviews => {
+                this.openIDB
+                  .then(db => {
+                    if(!db) return;
+                    
+                    // Now that we have the Reviews from the Network, put in indexedDB
+                    const tx = db.transaction('reviews', 'readwrite');
+                    let store = tx.objectStore('reviews');
+                    
+                    reviews.forEach(networkReview => {
+                      store.put(networkReview);
+                    })
                   })
-                })
-                callback(null,  reviewsFromNetwork)
+                // Keep using the reviews from the network
+                callback(null, reviews);
               })
               .catch(error => {
-                // There is an error in fetching reviews from the network
-                callback(error,  null);
+                // Cannot fetch the reviews from the network
+                callback(error, null);
               })
-              
-              
           }
         })
       })
   }
- 
+  
+  /*
+  *   User Review Submission
+  * */
+  static reviewFormSubmission(reviewFormSubmissionData) {
+    console.log(reviewFormSubmissionData);
+    
+    return fetch(`${DBHelper.DATABASE_URL}reviews`, {
+      body: JSON.stringify(reviewFormSubmissionData),
+      method: 'POST',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'content-type': 'application/json'
+      },
+      mode: 'cors',
+      redirect: 'follow',
+      referrer: 'no-referrer'
+    })
+      .then(response => {
+        response.json()
+          .then(reviewFormSubmissionData => {
+            this.openIDB
+              .then(db => {
+                if(!db) return;
+                
+                // store the review form submission data in indexedDB !
+                const tx = db.transaction('reviews', 'readwrite');
+                let store = tx.objectStore('reviews');
+                store.put(reviewFormSubmissionData);
+              })
+            return reviewFormSubmissionData;
+          })
+      })
+      .catch(error => {
+        // We could not submit the review because we are offline
+        // So we will store the review form submission data in offline-reviews object store
+        //   and will add the property updatedAt to the form submission data
+        
+        reviewFormSubmissionData['updatedAt'] = new Date().getTime();
+        console.log(reviewFormSubmissionData);
+        
+        this.openIDB
+          .then(db => {
+            if(!db) return;
+            
+            // Put the offline user form submission data into indexedDB
+            const tx = db.transaction('offline-reviews', 'readwrite');
+            let store = tx.objectStore('offline-reviews');
+            store.put(reviewFormSubmissionData);
+            console.log('We are offline, so will will store the user review in the offline-reviews object store');
+          })
+        return;
+      })
+  }
+
+  
   
   
   /**
@@ -285,6 +340,7 @@ class DBHelper {
   static favoriteStatusUpdate(restaurantID, favorite_status) {
     
     const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
+    console.log(url);
     let headers = new Headers();
     headers.set('Accept', 'application/json');
     

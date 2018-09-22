@@ -18,7 +18,7 @@ window.initMap = () => {
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
   });
-}
+};
 
 /**
  * Get current restaurant from page URL.
@@ -39,8 +39,16 @@ fetchRestaurantFromURL = (callback) => {
         console.error(error);
         return;
       }
-      fillRestaurantHTML();
-      callback(null, restaurant)
+      DBHelper.fetchReviews(self.restaurant, (error, reviews) => {
+        self.restaurant.reviews = reviews;
+        if(!reviews) {
+          console.error(error);
+        }
+        fillReviewsHTML();
+        callback(null, restaurant)
+      });
+      /*fillRestaurantHTML();
+      callback(null, restaurant)*/
     });
   }
 };
@@ -108,6 +116,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
+    noReviews.setAttribute('tabindex', 0);
     container.appendChild(noReviews);
     return;
   }
@@ -171,3 +180,4 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
+

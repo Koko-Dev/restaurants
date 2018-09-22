@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-145';
+var staticCacheName = 'restaurants-151';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -34,8 +34,8 @@ var cacheURLs = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(staticCacheName)
-      .then(cache => cache.addAll(cacheURLs))
-      .then(() => self.skipWaiting())
+          .then(cache => cache.addAll(cacheURLs))
+          .then(() => self.skipWaiting())
   )
 });
 
@@ -60,27 +60,26 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
           .then(response => {
-      if(response) {
-        // console.log('The event.request was found in the cache');
-        return response;
-      }
-      return fetch(event.request).then(networkResponse => {
-        if(networkResponse === 404) return;
-        return caches.open(staticCacheName)
-          .then(cache => {
-            cache.put(event.request.url,  networkResponse.clone());
-            // console.log('The event.request was put in the cache');
-            return networkResponse;
+            if(response) {
+              // console.log('The event.request was found in the cache');
+              return response;
+            }
+            return fetch(event.request).then(networkResponse => {
+              if(networkResponse === 404) return;
+              return caches.open(staticCacheName)
+                           .then(cache => {
+                             cache.put(event.request.url,  networkResponse.clone());
+                             // console.log('The event.request was put in the cache');
+                             return networkResponse;
+                           })
+            })
           })
-      })
-    })
-      .catch(error => {
-        console.log('Error in the fetch event: ', error);
-        return;
-      })
+          .catch(error => {
+            console.log('Error in the fetch event: ', error);
+            return;
+          })
   )
 });
-
 
 
 
