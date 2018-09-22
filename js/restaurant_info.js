@@ -151,6 +151,28 @@ createReviewHTML = (review) => {
   return li;
 }
 
+// Add a event listener for a review submission
+let form = document.getElementById('reviewForm');
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  let review = {'restaurant_id': self.restaurant.id};
+  const formData = new FormData(form);
+  
+  for(let [k, v] of formData.entries()) {
+    review[k] = v;
+  }
+  DBHelper.reviewFormSubmission(review)
+    .then(data => {
+      let ul = document.querySelector('#reviews-list');
+      ul.appendChild(createReviewHTML(review));
+      form.reset();
+    })
+    .catch(error => {
+      console.error(error);
+    })
+});
+
 /**
  * Add restaurant name to the breadcrumb navigation menu
  */

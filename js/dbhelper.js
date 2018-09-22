@@ -289,7 +289,7 @@ class DBHelper {
         //   and will add the property updatedAt to the form submission data
         
         reviewFormSubmissionData['updatedAt'] = new Date().getTime();
-        console.log(reviewFormSubmissionData);
+        console.log(reviewFormSubmissionData['updateAt']);
         
         this.openIDB
           .then(db => {
@@ -300,12 +300,37 @@ class DBHelper {
             let store = tx.objectStore('offline-reviews');
             store.put(reviewFormSubmissionData);
             console.log('We are offline, so will will store the user review in the offline-reviews object store');
-          })
-        return;
+          });
+        
+        return reviewFormSubmissionData;
       })
   }
-
   
+  static clearAllOfflineReviews() {
+    DBHelper.openIDB.then(db => {
+      const tx = db.transaction('offline-reviews', 'readwrite');
+      let store = tx.objectStore('offline-reviews').clear();
+    })
+  }
+  
+  static offlineReviewSubmission() {
+    DBHelper.openIDB
+      .then(db => {
+        if(!db) return;
+        
+        const tx = db.transaction('offline-reviews');
+        let store = tx.objectStore('offline-reviews');
+        store.getAll().then(offlineReviews => {
+          console.log(offlineReviews);
+          offlineReviews.forEach(offlineReview => {
+            DBHelper.reviewFormSubmission(offlineReview);
+          });
+          
+          DBHelper.clearAllOfflineReviews();
+        })
+        
+      })
+  }
   
   
   /**
