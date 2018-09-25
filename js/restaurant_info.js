@@ -69,6 +69,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = `/img/1x-banner-${imgUrl}`;
   image.srcset = `/img/1x-banner-${imgUrl} 300w, /img/2x-banner-${imgUrl} 600w, /img/3x-banner-${imgUrl} 800w`;
   image.sizes = "(max-width: 300px), (min-width: 600px), (min-width: 800px)";
+ 
   
   image.setAttribute('alt',`An image of ${restaurant.name} restaurant in ${restaurant.neighborhood}`);
   
@@ -137,7 +138,9 @@ createReviewHTML = (review) => {
   li.appendChild(name);
   
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  // date.innerHTML = review.date;
+  const updateTime = review.updatedAt;
+  date.innerHTML = new Date(updateTime);
   li.appendChild(date);
   
   const rating = document.createElement('p');
