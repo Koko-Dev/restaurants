@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-152';
+var staticCacheName = 'restaurants-156';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -7,7 +7,7 @@ var cacheURLs = [
   '/restaurant.html',
   '/js/dbhelper.js',
   '/js/register.js',
-  '/js/idb.js',
+  '/node_modules/idb/lib/idb.js',
   '/js/restaurant_info.js',
   '/img/1.jpg',
   '/img/2.jpg',
@@ -80,6 +80,22 @@ self.addEventListener('fetch', event => {
           })
   )
 });
+
+/*self.addEventListener('message', event => {
+  console.log(`[sw.js] message event: ${event}`);
+  
+  if(event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  } 
+});
+
+// Information on backgroundSync from https://ponyfoo.com/articles/backgroundsync
+
+self.addEventListener('sync', event => {
+  if(event.tag === 'submit-review') {
+    
+  }
+})*/
 
 
 
