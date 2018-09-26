@@ -47,8 +47,8 @@ fetchRestaurantFromURL = (callback) => {
         fillReviewsHTML();
         callback(null, restaurant)
       });
-      /*fillRestaurantHTML();
-      callback(null, restaurant)*/
+      fillRestaurantHTML();
+      callback(null, restaurant)
     });
   }
 };
@@ -57,6 +57,9 @@ fetchRestaurantFromURL = (callback) => {
  * Create restaurant HTML and add it to the webpage
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
+  const restaurant_container = document.getElementById('restaurant-container');
+  const restaurant_container_div = document.createElement('div');
+  
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
   name.setAttribute('tabindex', 0);
