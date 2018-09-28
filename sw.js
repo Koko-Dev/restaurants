@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-156';
+var staticCacheName = 'restaurants-157';
 var cacheURLs = [
   '/',
   '/index.html',
@@ -30,7 +30,6 @@ var cacheURLs = [
   '/img/2x-9.jpg',
   '/img/2x-10.jpg'
 ];
-
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(staticCacheName)
@@ -96,6 +95,26 @@ self.addEventListener('sync', event => {
     
   }
 })*/
+
+// This works
+/*self.addEventListener('sync', function(event) {
+  if(event.tag === 'myFirstSync') {
+    event.waitUntil(doSomeStuff())
+  }
+  
+})
+
+function doSomeStuff() {
+  console.log('[SW] myFirstSync');
+  
+}*/
+
+self.addEventListener('sync', function(event) {
+  if(event.tag == 'oneTimeSync') {
+    console.log('One time Sync event fired: ', self.registration);
+    
+  }
+});
 
 
 

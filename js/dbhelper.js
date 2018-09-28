@@ -137,8 +137,8 @@ class DBHelper {
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
-      console.log('1');
-      console.log(restaurants);
+      /*console.log('1');
+      console.log(restaurants);*/
       if (error) {
         callback(error, null);
       } else {
@@ -254,7 +254,7 @@ class DBHelper {
   *   User Review Submission
   * */
   static reviewFormSubmission(reviewFormSubmissionData) {
-    console.log(reviewFormSubmissionData);
+    console.log(reviewFormSubmissionData); // shows user review submission
     
     return fetch(`${DBHelper.DATABASE_URL}reviews`, {
       body: JSON.stringify(reviewFormSubmissionData),
@@ -275,11 +275,15 @@ class DBHelper {
               .then(db => {
                 if(!db) return;
                 
-                // store the review form submission data in indexedDB !
+                // store the review form submission data in indexedDB
+                // verified in reviews object Store and
+                // stored by keyPath id position among total number of all time reviews
+                //  and Not in restaurn_id position for specific restaurant id
                 const tx = db.transaction('reviews', 'readwrite');
                 let store = tx.objectStore('reviews');
                 store.put(reviewFormSubmissionData);
               })
+            console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
             return reviewFormSubmissionData;
           })
       })
