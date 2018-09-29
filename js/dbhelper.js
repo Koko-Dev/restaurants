@@ -278,7 +278,7 @@ class DBHelper {
                 // store the review form submission data in indexedDB
                 // verified in reviews object Store and
                 // stored by keyPath id position among total number of all time reviews
-                //  and Not in restaurn_id position for specific restaurant id
+                //  and Not in restaurant_id position for specific restaurant id
                 const tx = db.transaction('reviews', 'readwrite');
                 let store = tx.objectStore('reviews');
                 store.put(reviewFormSubmissionData);
@@ -389,6 +389,6 @@ class DBHelper {
             })
       })
   }
-} //  end DBHelper
+} //  end DBHelper                               
 
 self.DBHelper = DBHelper;

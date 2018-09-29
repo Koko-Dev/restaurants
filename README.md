@@ -15,8 +15,7 @@ To run application:
 To run application:
 	1.  Download or clone:  https://github.com/Koko-Dev/pwa-restaurant-project to populate the restaurant data.  Run by:  `node app.js`
 	2. Then download or clone this project https://github.com/Koko-Dev/restaurants
-            a.  Put in your Google Maps API Key in the script tags on `index.html` and `restaurant.html`
-            b.  Run by:  `npm start`
+            a.  Run by:  `npm start`
 
 
 
