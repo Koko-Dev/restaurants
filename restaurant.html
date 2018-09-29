@@ -48,37 +48,44 @@
       <p id="restaurant-address"></p>
       <table id="restaurant-hours"></table>
     </section>
-
+	  
     <!-- Beginning reviews -->
     <section id="reviews-container">
 			<ul id="reviews-list"></ul>
+	    
 			<form id="reviewForm">
-        <h3>Add your own review</h3>
-				<p>
-					<label for="name">Name:</label>
+        <h3 style="font-size: 17pt;">Add your own review</h3>
+				
+				<div style="font-size: 16pt;">
+					<label for="name">Name</label>
 					<input type="text" id="name" name="name" placeholder="Name"
 					       required/>
-				</p>
-				<p>&nbsp;</p>
-				<p>
-					<label for="rating">Rating</label>
-					<select name="rating">
+				</div>
+				
+				
+				<div class="rating">
+						<label for="rating">Rating  =></label>
+				
+					<select name="rating" class="rating">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3" selected>3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
 					</select>
-				</p>
-				<p>
-					<!-- <label for="reviewText">Review text:</label> -->
+				</div>
+				
+				<div>
+						<!-- <label for="reviewText">Review text:</label> -->
 					<textarea rows="6" name="comments"
 					          placeholder="Add your own Review here."
-                    required></textarea>
-				</p>
-				<p>
+					          required></textarea>
+				</div>
+				
+				<div class="button">
 					<input type="submit" value="Submit Review">
-				</p>
+					 <br><br>
+				</div>
 			</form>
 		</section>  <!-- End reviews -->
 

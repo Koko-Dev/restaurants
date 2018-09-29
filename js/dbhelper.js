@@ -383,7 +383,7 @@ class DBHelper {
               const tx = db.transaction('restaurants', 'readwrite');
               const store = tx.objectStore('restaurants');
               store.get(restaurantID).then(restaurant => {
-                restaurant.is_favorite = favorite_status.toString();
+                restaurant.is_favorite = favorite_status;
                 store.put(restaurant);
               })
             })

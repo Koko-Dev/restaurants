@@ -165,7 +165,6 @@ createRestaurantHTML = (restaurant) => {
   // Add the favorites button, update at endpoint, change class name on click
   const favorite = document.createElement('button');
   favorite.classList.add('favButton');
-  
   favorite.innerHTML = '♥';
   
   favorite.onclick = () => {
