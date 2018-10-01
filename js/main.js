@@ -1,7 +1,6 @@
 let restaurants,
   neighborhoods,
-  cuisines
-// var map;
+  cuisines;
 var newMap;
 var markers = [];
 
@@ -72,22 +71,6 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
 };
 
 /**
- * Initialize Google map, called from HTML.
- */
-/*window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  updateRestaurants();
-};*/
-
-/**
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
@@ -106,9 +89,7 @@ initMap = () => {
   }).addTo(newMap);
   
   updateRestaurants();
-}
-
-
+};
 
 /**
  * Update page and map for current restaurants.
@@ -143,7 +124,6 @@ resetRestaurants = (restaurants) => {
   ul.innerHTML = '';
   
   // Remove all map markers
-  // self.markers.forEach(m => m.setMap(null));  // used in google maps api
   if (self.markers) {
     self.markers.forEach(marker => marker.remove());
   }
@@ -248,21 +228,6 @@ updateFavoriteClassName = (theFavButton, theFavStatus) => {
     theFavButton.setAttribute('aria-label', 'Unfavorite this restaurant');
   }
 };
-
-/**
- * Add markers for current restaurants to the map.  For GoogleMaps API
- */
-/*
-addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
-    });
-    self.markers.push(marker);
-  });
-};*/
 
 /**
  * Add markers for current restaurants to the map.
