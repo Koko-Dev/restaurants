@@ -33,8 +33,7 @@ initMap = () => {
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
-};
-
+}
 /**
  * Get current restaurant from page URL.
  */

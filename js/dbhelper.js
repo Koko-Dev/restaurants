@@ -340,26 +340,17 @@ class DBHelper {
   /**
    * Map marker for a restaurant.
    */
-  /*static mapMarkerForRestaurant(restaurant, map) {
-   // https://leafletjs.com/reference-1.3.0.html#marker
-   const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
-   {title: restaurant.name,
-   alt: restaurant.name,
-   url: DBHelper.urlForRestaurant(restaurant)
-   })
-   marker.addTo(newMap);
-   return marker;
-   }*/
   static mapMarkerForRestaurant(restaurant, map) {
-    const marker = new google.maps.Marker({
-      position: restaurant.latlng,
-      title: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant),
-      map: map,
-      animation: google.maps.Animation.DROP}
-    );
+    // https://leafletjs.com/reference-1.3.0.html#marker
+    const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
+      {title: restaurant.name,
+        alt: restaurant.name,
+        url: DBHelper.urlForRestaurant(restaurant)
+      })
+    marker.addTo(newMap);
     return marker;
   }
+  
   
   // Updating is_favorite status based on user choice of favorite/unfavorite
   // PUT Endpoints to Favorite or Unfavorite a restaurant
