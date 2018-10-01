@@ -1,10 +1,11 @@
 let restaurant;
 var map;
+var newMap;
 
 /**
  * Initialize Google map, called from HTML.
  */
-window.initMap = () => {
+/*window.initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
@@ -16,6 +17,40 @@ window.initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+    }
+  });
+};*/
+
+/**
+ * Initialize map as soon as the page is loaded.
+ */
+document.addEventListener('DOMContentLoaded', (event) => {
+  initMap();
+});
+
+/**
+ * Initialize leaflet map
+ */
+initMap = () => {
+  fetchRestaurantFromURL((error, restaurant) => {
+    if (error) { // Got an error!
+      console.error(error);
+    } else {
+      self.newMap = L.map('map', {
+        center: [restaurant.latlng.lat, restaurant.latlng.lng],
+        zoom: 16,
+        scrollWheelZoom: false
+      });
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
+        mapboxToken: 'pk.eyJ1IjoiYnJpa29sb3JlIiwiYSI6ImNqbXFxaDl1bjFzeDUzcG55OHJqdTR1eGgifQ.kjWF_-sz_Tl8ho8zQK60XA',
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox.streets'
+      }).addTo(newMap);
+      fillBreadcrumb();
+      DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
 };
@@ -108,13 +143,12 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     
     hours.appendChild(row);
   }
-}
+};
 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  // console.log(reviews);
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
@@ -122,7 +156,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   
   if (!reviews) {
     const noReviews = document.createElement('p');
-    // noReviews.innerHTML = 'No reviews yet!';
+    noReviews.innerHTML = 'No reviews yet!';
     noReviews.setAttribute('tabindex', 0);
     container.appendChild(noReviews);
     return;
@@ -132,7 +166,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);
-}
+};
 
 /**
  * Create review HTML and add it to the webpage.
@@ -144,8 +178,11 @@ createReviewHTML = (review) => {
   li.appendChild(name);
   
   const date = document.createElement('p');
+  
   // date.innerHTML = review.date;
   const updateTime = review.updatedAt;
+  console.log(typeof updateTime);
+  
   date.innerHTML = new Date(updateTime);
   li.appendChild(date);
   
@@ -158,7 +195,7 @@ createReviewHTML = (review) => {
   li.appendChild(comments);
   
   return li;
-}
+};
 
 // Add a event listener for a review submission
 let form = document.getElementById('reviewForm');
