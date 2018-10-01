@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Koko-Dev/restaurants#readme",
   "devDependencies": {
+    "del": "^3.0.0",
     "idb": "^2.1.3"
   },
   "dependencies": {}

@@ -331,66 +331,6 @@ nav h1 a {
     width: 100%;
 }
 
-form {
-  max-width: 100%;
-  padding: 1em;
-  border: 1px solid #cccccc;
-}
-
-form div + div {
-  margin-top: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 300px;
-}
-
-label {
-  display: inline-block;
-  /*width: 90px;*/
-  text-align: right;
-}
-
-.rating {
-  font: 1em sans-serif;
-}
-select {
-  padding: 4px;
-  width: 40px;
-}
-
-input, textarea {
-  font: 1em sans-serif;
-  max-width: 70%;
-  box-sizing: border-box;
-  padding: 5px;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #000;
-}
-
-textarea {
-  vertical-align: top;
-  width: 80%;
-}
-
-/*.button {
-  padding-left: 90px;
-  
-}*/
-
-
-
-/*button {
-  margin-left: .5em;
-  border-radius: 5px;
-}*/
-
-
-
-
-
 #reviews-list {
   margin: 0;
   padding: 0; }
