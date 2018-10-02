@@ -352,12 +352,24 @@ class DBHelper {
   }
   
   
+  // Ensures the favorites is Boolean to help with logic
+  static checkForBoolean(favorite_status) {
+    if(favorite_status === "true") favorite_status = true;
+    if(favorite_status === "false") favorite_status = false;
+    return favorite_status;
+  }
+  
+  
+  
   // Updating is_favorite status based on user choice of favorite/unfavorite
   // PUT Endpoints to Favorite or Unfavorite a restaurant
   // Favorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=true
   // Unfavorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=false
   // This will store User choice if favorite or unfavorite in indexedDB for offline-first capability
   static favoriteStatusUpdate(restaurantID, favorite_status) {
+    
+    console.log(`[DBHELPER favorite status] ==> ${favorite_status} ==> before call`);
+    
     
     const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
     console.log(url);
@@ -374,7 +386,7 @@ class DBHelper {
               const tx = db.transaction('restaurants', 'readwrite');
               const store = tx.objectStore('restaurants');
               store.get(restaurantID).then(restaurant => {
-                restaurant.is_favorite = favorite_status;
+                restaurant.is_favorite = this.checkForBoolean(favorite_status);
                 store.put(restaurant);
               })
             })

@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-170';
+var staticCacheName = 'restaurants-175';
 
 var cacheURLs = [
   '/',
@@ -72,35 +72,6 @@ self.addEventListener('fetch', event => {
           })
   )
 });
-
-/*self.addEventListener('message', event => {
-  console.log(`[sw.js] message event: ${event}`);
-  
-  if(event.data.action === 'skipWaiting') {
-    self.skipWaiting();
-  } 
-});
-
-// Information on backgroundSync from https://ponyfoo.com/articles/backgroundsync
-
-self.addEventListener('sync', event => {
-  if(event.tag === 'submit-review') {
-    
-  }
-})*/
-
-// This works
-/*self.addEventListener('sync', function(event) {
-  if(event.tag === 'myFirstSync') {
-    event.waitUntil(doSomeStuff())
-  }
-  
-})
-
-function doSomeStuff() {
-  console.log('[SW] myFirstSync');
-  
-}*/
 
 self.addEventListener('sync', function(event) {
   if(event.tag == 'oneTimeSync') {

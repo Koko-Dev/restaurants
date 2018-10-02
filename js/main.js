@@ -28,7 +28,7 @@ fetchNeighborhoods = () => {
     }
   });
 }
-                                          
+
 /**
  * Set neighborhoods HTML.
  */
@@ -180,7 +180,7 @@ createRestaurantHTML = (restaurant) => {
   favorite.onclick = () => {
     let currentFavStatus = !restaurant.is_favorite;
     
-    // 
+    //
     DBHelper.favoriteStatusUpdate(restaurant.id, currentFavStatus);
     
     //  Update the class name is put in separate function because we call it twice
@@ -222,10 +222,12 @@ updateFavoriteClassName = (theFavButton, theFavStatus) => {
     theFavButton.classList.remove('isFavorite');
     theFavButton.classList.add('isNotFavorite');
     theFavButton.setAttribute('aria-label', 'Favorite this restaurant');
+    theFavButton.setAttribute('aria-pressed', 'false');
   } else {
     theFavButton.classList.remove('isNotFavorite');
     theFavButton.classList.add('isFavorite');
     theFavButton.setAttribute('aria-label', 'Unfavorite this restaurant');
+    theFavButton.setAttribute('aria-pressed', 'true');
   }
 };
 
