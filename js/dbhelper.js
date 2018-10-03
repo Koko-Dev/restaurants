@@ -283,7 +283,7 @@ class DBHelper {
                         let store = tx.objectStore('reviews');
                         store.put(reviewFormSubmissionData);
                       })
-                  console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
+                  // console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
                   return reviewFormSubmissionData;
                 })
       })
@@ -292,8 +292,8 @@ class DBHelper {
         // So we will store the review form submission data in offline-reviews object store
         //   and will add the property updatedAt to the form submission data
         
+        
         reviewFormSubmissionData['updatedAt'] = new Date().getTime();
-        console.log(reviewFormSubmissionData['updateAt']);
         
         this.openIDB
             .then(db => {
@@ -315,6 +315,7 @@ class DBHelper {
       const tx = db.transaction('offline-reviews', 'readwrite');
       let store = tx.objectStore('offline-reviews').clear();
     })
+    return;
   }
   
   static offlineReviewSubmission() {
@@ -366,10 +367,7 @@ class DBHelper {
   // Unfavorite a restaurant== http://localhost:1337/restaurants/<restaurant_id>/?is_favorite=false
   // This will store User choice if favorite or unfavorite in indexedDB for offline-first capability
   static favoriteStatusUpdate(restaurantID, favorite_status) {
-    
-    console.log(`[DBHELPER favorite status] ==> ${favorite_status} ==> before call`);
-    
-    
+   
     const url = `http://localhost:1337/restaurants/${restaurantID}/?is_favorite=${favorite_status}`;
     console.log(url);
     let headers = new Headers();

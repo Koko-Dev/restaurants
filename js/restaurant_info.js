@@ -184,7 +184,7 @@ createReviewHTML = (review) => {
   
   // date.innerHTML = review.date;
   const updateTime = review.updatedAt;
-  console.log('the review.updatedAt is', typeof updateTime);
+  // console.log('the review.updatedAt is', typeof updateTime);
   
   date.innerHTML = new Date(updateTime);
   li.appendChild(date);
