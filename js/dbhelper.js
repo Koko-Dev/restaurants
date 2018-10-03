@@ -233,11 +233,23 @@ class DBHelper {
                     // Now that we have the Reviews from the Network, put in indexedDB
                     const tx = db.transaction('reviews', 'readwrite');
                     let store = tx.objectStore('reviews');
+                    const txx = db.transaction('offline-reviews', 'readwrite');
+                    let offlineStore = txx.objectStore('offline-reviews');
+                    
+                    offlineStore.getAll().then(offRevs => {
+                      if(offRevs && offRevs.length > 0) {
+                        offRevs.forEach(offRev => {
+                          store.put(offRev);
+                          offRev.delete();
+                        })
+                      }
+                    })
                     
                     reviews.forEach(networkReview => {
                       store.put(networkReview);
                     })
                   })
+                
                 // Keep using the reviews from the network
                 callback(null, reviews);
               })
