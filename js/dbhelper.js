@@ -205,66 +205,54 @@ class DBHelper {
   static imageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.id}`);
   }
-
+  
   
   static fetchReviews(restaurant, callback) {
     DBHelper.openIDB
-      .then(db => {
-        if(!db) return;
-        
-        // Check indexedDB first for reviews
-        const tx = db.transaction('reviews');
-        let store = tx.objectStore('reviews');
-        store.getAll().then(theReviews => {
-          if(theReviews && theReviews.length > 0) {
-            // Use the reviews from indexedDB
-            callback(null, theReviews);
-        } else {
-            // There are no Reviews in IDB, so fetch them from the Network
-            fetch(`${DBHelper.DATABASE_URL}reviews/?restaurant_id=${restaurant.id}`)
-              .then(response => {
-                return response.json()
-              })
-              .then(reviews => {
-                this.openIDB
-                  .then(db => {
-                    if(!db) return;
-                    
-                    // Now that we have the Reviews from the Network, put in indexedDB
-                    const tx = db.transaction('reviews', 'readwrite');
-                    let store = tx.objectStore('reviews');
-                    const txx = db.transaction('offline-reviews', 'readwrite');
-                    let offlineStore = txx.objectStore('offline-reviews');
-                    
-                    offlineStore.getAll().then(offRevs => {
-                      if(offRevs && offRevs.length > 0) {
-                        offRevs.forEach(offRev => {
-                          store.put(offRev);
-                          offRev.delete();
-                        })
-                      }
+            .then(db => {
+              if(!db) return;
+      
+              // Check indexedDB first for reviews
+              const tx = db.transaction('reviews');
+              let store = tx.objectStore('reviews');
+              store.getAll().then(theReviews => {
+                if(theReviews && theReviews.length > 0) {
+                  // Use the reviews from indexedDB
+                  callback(null, theReviews);
+                } else {
+                  // There are no Reviews in IDB, so fetch them from the Network
+                  fetch(`${DBHelper.DATABASE_URL}reviews/?restaurant_id=${restaurant.id}`)
+                    .then(response => {
+                      return response.json()
                     })
-                    
-                    reviews.forEach(networkReview => {
-                      store.put(networkReview);
-                    })
-                  })
+                    .then(reviews => {
+                      this.openIDB
+                          .then(db => {
+                            if(!db) return;
                 
-                // Keep using the reviews from the network
-                callback(null, reviews);
+                            // Now that we have the Reviews from the Network, put in indexedDB
+                            const tx = db.transaction('reviews', 'readwrite');
+                            let store = tx.objectStore('reviews');
+                
+                            reviews.forEach(networkReview => {
+                              store.put(networkReview);
+                            })
+                          })
+                      // Keep using the reviews from the network
+                      callback(null, reviews);
+                    })
+                    .catch(error => {
+                      // Cannot fetch the reviews from the network
+                      callback(error, null);
+                    })
+                }
               })
-              .catch(error => {
-                // Cannot fetch the reviews from the network
-                callback(error, null);
-              })
-          }
-        })
-      })
+            })
   }
   
   /*
-  *   User Review Submission
-  * */
+   *   User Review Submission
+   * */
   static reviewFormSubmission(reviewFormSubmissionData) {
     console.log(reviewFormSubmissionData); // shows user review submission
     
@@ -282,22 +270,22 @@ class DBHelper {
     })
       .then(response => {
         response.json()
-          .then(reviewFormSubmissionData => {
-            this.openIDB
-              .then(db => {
-                if(!db) return;
-                
-                // store the review form submission data in indexedDB
-                // verified in reviews object Store and
-                // stored by keyPath id position among total number of all time reviews
-                //  and Not in restaurant_id position for specific restaurant id
-                const tx = db.transaction('reviews', 'readwrite');
-                let store = tx.objectStore('reviews');
-                store.put(reviewFormSubmissionData);
-              })
-            console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
-            return reviewFormSubmissionData;
-          })
+                .then(reviewFormSubmissionData => {
+                  this.openIDB
+                      .then(db => {
+                        if(!db) return;
+            
+                        // store the review form submission data in indexedDB
+                        // verified in reviews object Store and
+                        // stored by keyPath id position among total number of all time reviews
+                        //  and Not in restaurant_id position for specific restaurant id
+                        const tx = db.transaction('reviews', 'readwrite');
+                        let store = tx.objectStore('reviews');
+                        store.put(reviewFormSubmissionData);
+                      })
+                  console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
+                  return reviewFormSubmissionData;
+                })
       })
       .catch(error => {
         // We could not submit the review because we are offline
@@ -308,15 +296,15 @@ class DBHelper {
         console.log(reviewFormSubmissionData['updateAt']);
         
         this.openIDB
-          .then(db => {
-            if(!db) return;
-            
-            // Put the offline user form submission data into indexedDB
-            const tx = db.transaction('offline-reviews', 'readwrite');
-            let store = tx.objectStore('offline-reviews');
-            store.put(reviewFormSubmissionData);
-            console.log('We are offline, so will will store the user review in the offline-reviews object store');
-          });
+            .then(db => {
+              if(!db) return;
+          
+              // Put the offline user form submission data into indexedDB
+              const tx = db.transaction('offline-reviews', 'readwrite');
+              let store = tx.objectStore('offline-reviews');
+              store.put(reviewFormSubmissionData);
+              console.log('We are offline, so will will store the user review in the offline-reviews object store');
+            });
         
         return reviewFormSubmissionData;
       })
@@ -331,23 +319,22 @@ class DBHelper {
   
   static offlineReviewSubmission() {
     DBHelper.openIDB
-      .then(db => {
-        if(!db) return;
+            .then(db => {
+              if(!db) return;
+      
+              const tx = db.transaction('offline-reviews');
+              let store = tx.objectStore('offline-reviews');
+              store.getAll().then(offlineReviews => {
+                console.log(offlineReviews);
+                offlineReviews.forEach(offlineReview => {
+                  DBHelper.reviewFormSubmission(offlineReview);
+                });
         
-        const tx = db.transaction('offline-reviews');
-        let store = tx.objectStore('offline-reviews');
-        store.getAll().then(offlineReviews => {
-          console.log(offlineReviews);
-          offlineReviews.forEach(offlineReview => {
-            DBHelper.reviewFormSubmission(offlineReview);
-          });
-          
-          DBHelper.clearAllOfflineReviews();
-        })
-        
-      })
+                DBHelper.clearAllOfflineReviews();
+              })
+      
+            })
   }
-  
   
   /**
    * Map marker for a restaurant.
