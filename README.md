@@ -5,36 +5,77 @@
 
 ## Project Overview: Stage 3:
 
-### To run application:
-	1.  Server depends on node.js, npm, and sails.js
-		Please make sure you have these installed before proceeding forward.
+### To run application
 
-	2. Download/Clone: https://github.com/Koko-Dev/pwa-restaurant-project to populate the restaurant data.
+##### Please make sure to install node.js, npm, and sails.js
 
-	3. Install project dependencies:  npm i
+###### Download/Clone  https://github.com/Koko-Dev/pwa-restaurant-project
 
-	4.  Install Sails.js globally: npm i sails -g
-
-	5.  Start the Server:  node server
-
-	You should now have access to your API server environment
-	debug: Environment : development debug: Port : 1337
-
-	6. Then download or clone this project https://github.com/Koko-Dev/restaurants
-            Run by:  npm start  if your computer has Python 3
-            If your computer has only Python 2, run: python -m SimpleHTTPServer
-            To view application navigate browser to port 8000 (i.e. localhost:8000)
+##### Install project dependencies:
 
 
+        npm i
 
-	NOTE:
-	Please use Chrome for this application for BackgroundSync capabilities
-	You must run both pwa-restaurant-project and mws-restaurant-stage-1 project
+##### Install Sails.js globally:
 
-	This is the current Lighthouse Audit Scores
-	![Lighthouse Audit Scores](/master/Stage-3-Audit.png)
 
-    
+        npm i sails -g
+
+##### Start the Server:
+
+
+        node server
+
+
+###### You should now have access to your API server environment
+###### debug: Environment : development debug: Port : 1337
+
+##### Download/Clone:   https://github.com/Koko-Dev/restaurants
+###### Install dependencies
+
+        npm install
+
+######  Start the Server  (if your computer has python 3)
+
+        npm start
+
+##### OR
+
+##### Start the Server (if your computer only has python 2)
+
+        python -m SimpleHTTPServer
+
+
+###### Navigate browser to port 8000 (i.e. localhost:8000)
+###### Please note, you must have both project servers running
+###### Please use Chrome for BackgroundSync Capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             
 
