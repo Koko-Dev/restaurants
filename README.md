@@ -9,39 +9,30 @@
 	1.  Server depends on node.js, npm, and sails.js
 		Please make sure you have these installed before proceeding forward.
 
-	2. Download or clone:  https://github.com/Koko-Dev/pwa-restaurant-project to populate the restaurant data.
-	   - This is used to populate the restaurants.
-			 Run by:  ````node app.js```
+	2. Download/Clone: https://github.com/Koko-Dev/pwa-restaurant-project to populate the restaurant data.
 
-	3. Install project dependencies:  ```npm i```
+	3. Install project dependencies:  npm i
 
-	4.  Install Sails.js globally: ```npm i sails -g```
+	4.  Install Sails.js globally: npm i sails -g
 
-	5.  Start the Server:  ````node server```
+	5.  Start the Server:  node server
 
-	**You should now have access to your API server environment**
-	**debug: Environment : development debug: **Port : 1337**
-
+	You should now have access to your API server environment
+	debug: Environment : development debug: Port : 1337
 
 	6. Then download or clone this project https://github.com/Koko-Dev/restaurants
-            *  Run by:  `npm start`  if your computer has Python 3
-            *  If your computer has only Python 2, run `python -m SimpleHTTPServer`
-            *  To view application navigate browser to port 8000 (i.e. ```localhost:8000```)
+            Run by:  npm start  if your computer has Python 3
+            If your computer has only Python 2, run: python -m SimpleHTTPServer
+            To view application navigate browser to port 8000 (i.e. localhost:8000)
 
 
 
-	**NOTE:**
-	_Please use Chrome for this application for BackgroundSync capabilities_
-	_You must run both **pwa-restaurant-project** and **mws-restaurant-stage-1** project
+	NOTE:
+	Please use Chrome for this application for BackgroundSync capabilities
+	You must run both pwa-restaurant-project and mws-restaurant-stage-1 project
 
-	**This is the current Lighthouse Audit Scores**
+	This is the current Lighthouse Audit Scores
 	![Lighthouse Audit Scores](/master/Stage-3-Audit.png)
-
-
-
-
-
-
 
     
 
