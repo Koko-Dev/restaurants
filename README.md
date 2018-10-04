@@ -5,8 +5,9 @@
 
 ## Project Overview: Stage 3:
 
-###To run application:
-	1.  Server depends on node.js, npm, and sails.js Please make sure you have these installed before proceeding forward.
+### To run application:
+	1.  Server depends on node.js, npm, and sails.js
+		Please make sure you have these installed before proceeding forward.
 
 	2. Download or clone:  https://github.com/Koko-Dev/pwa-restaurant-project to populate the restaurant data.
 	   - This is used to populate the restaurants.
