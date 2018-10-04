@@ -50,6 +50,12 @@
 ###### Please note, you must have both project servers running
 ###### Please use Chrome for BackgroundSync Capabilities
 
+### Stage-3 Lighthouse Audit Scores as of 04Oct2018
+
+![Stage-3 Lighthouse Audit Scores](https://raw.githubusercontent.com/Koko-Dev/restaurants/master/Stage-3-Audit.png)
+
+
+
 
 
 
