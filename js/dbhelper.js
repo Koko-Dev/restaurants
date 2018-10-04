@@ -326,14 +326,11 @@ class DBHelper {
               const tx = db.transaction('offline-reviews');
               let store = tx.objectStore('offline-reviews');
               store.getAll().then(offlineReviews => {
-                console.log(offlineReviews);
                 offlineReviews.forEach(offlineReview => {
                   DBHelper.reviewFormSubmission(offlineReview);
                 });
-        
                 DBHelper.clearAllOfflineReviews();
               })
-      
             })
   }
   

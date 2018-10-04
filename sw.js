@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-186';
+var staticCacheName = 'restaurants-191';
 
 var cacheURLs = [
   '/',
@@ -47,6 +47,9 @@ self.addEventListener('activate', event => {
   return self.clients.claim();
 });
 
+
+
+
 self.addEventListener('fetch', event => {
   // console.log("[Service Worker] fetch event in SW");
   event.respondWith(
@@ -73,12 +76,99 @@ self.addEventListener('fetch', event => {
   )
 });
 
-self.addEventListener('sync', function(event) {
-  if(event.tag == 'oneTimeSync') {
-    console.log('One time Sync event fired: ', self.registration);
-    
+
+// From Jake Archibald Wittr demo
+// https://github.com/jakearchibald/wittr
+self.addEventListener('message', event => {
+  console.log(event);
+  if (event.data.action === 'skipWaiting') {
+    self.skipWaiting();
   }
 });
+
+
+self.addEventListener('sync', event => {
+  if (event.tag == 'oneTimeSync') {
+    
+    // Open Database
+    const idbOpenDB = indexedDB.open('restaurant-database', 3);
+    
+    idbOpenDB.onsuccess = function (e) {
+  
+      // Do something with request.result => resource from:
+      // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+      // The result is the opened restaurant-database -- assign to db
+      db = idbOpenDB.result;
+  
+      // Get reviews from the offline-reviews store and store it in a var
+      const tx = db.transaction('offline-reviews', 'readwrite');
+      let store = tx.objectStore('offline-reviews');
+      let offlineStore = store.getAll();
+      
+      // Post the offline reviews using POST Endpoint:
+      // Create a new restaurant review ==> http://localhost:1337/reviews/
+      offlineStore.onsuccess =  () => {
+        for (let i = 0; i < offlineStore.result.length; i++) {
+          fetch(`http://localhost:1337/reviews/`, {
+            body: JSON.stringify(offlineStore.result[i]),
+            method: 'POST',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+              'content-type': 'application/json'
+            },
+            mode: 'cors',
+            redirect: 'follow',
+            referrer: 'no-referrer'
+          })
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              // On Success of offlineStore we get the data and we add it to the reviews store
+              const tx = db.transaction('reviews', 'readwrite');
+              let store = tx.objectStore('reviews');
+              let reviewsStore = store.add(data);
+              
+              
+              // On Success of adding the data to the reviews store,
+              // ... we no longer need the data in offline-reviews stpre, so we clear it
+              reviewsStore.onsuccess = data => {
+                const tx = db.transaction('offline-reviews', 'readwrite');
+                let store = tx.objectStore('offline-reviews');
+                let offline_store = store.clear();
+                
+                // On Success of clearing the data in the offline_store, we watch for errors
+                offline_store.onsuccess =  () => {};
+                offline_store.onerror = error => {
+                  console.log('[SW-sync] - We cannot clear the offline-reviews data in the offline_store: ', error);
+                }
+              };
+              
+              // If there is an error in opening the reviews store and clearing
+              // the offline-reviews data, we log the error
+              reviewsStore.onerror = error => {
+                console.log('[SW-sync] - We could not clear the offline-reviews data: ', error);
+              }
+            })
+            .catch(error => {
+              console.log('[SW-sync] - POST fetch failed: ', error);
+            })
+        } // end for loop
+      }
+      offlineStore.onerror = error => {
+        console.log('[SW-sync] - offlineStore failed: ', error);
+      }
+    }
+    
+    
+    idbOpenDB.onerror = error => {
+      console.log('[SW-sync] - idbOpenDB failed: ', error);
+    }
+  }     // end if statement
+  
+});
+
 
 
 
