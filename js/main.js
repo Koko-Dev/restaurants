@@ -246,3 +246,4 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
   
 }
+
