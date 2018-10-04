@@ -30,49 +30,50 @@
 	
 	<style>
 		
-			form {
+			/***** Review Form *****/
+			
+			#reviewForm {
+				font: 1em sans-serif;
+				border: 1px solid #ccc;
+				padding: .5em;
+				margin: .25em;
 				max-width: 100%;
-				padding: 1em;
-				border: 1px solid #cccccc;
 			}
 			
-			form div + div {
-				margin-top: 1em;
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				max-width: 300px;
+			#reviewForm label,
+			#reviewForm input,
+			#reviewForm textarea {
+				display: block;
+				padding: .8em;
+				min-width: 80%;
+				max-width: 100%;
+				border-radius: .3em;
 			}
 			
-			label {
-				display: inline-block;
-				/*width: 90px;*/
-				text-align: right;
+			#reviewForm label {
+				margin: .5em -.5em;
 			}
 			
-			.rating {
-				font: 1em sans-serif;
+			#reviewForm select {
+				min-width: 4em;
+				-webkit-appearance: menulist-button;
+				height: 40px;
 			}
 			
-			select {
-				padding: 4px;
-				width: 40px;
+			#reviewForm input[type="submit"] {
+				display: block;
+				margin: 1.5em 0;
+				padding: 1em 0;
+				background-color: #a05700;
+				color: #fff;
 			}
 			
-			input, textarea {
-				font: 1em sans-serif;
-				max-width: 70%;
-				box-sizing: border-box;
-				padding: 5px;
-			}
-			
-			input:focus, select:focus, textarea:focus {
-				border-color: #000;
-			}
-			
-			textarea {
-				vertical-align: top;
-				width: 80%;
+			@media (min-width: 35em) {
+				#reviewForm label,
+				#reviewForm input,
+				#reviewForm textarea {
+					max-width: 15em;
+				}
 			}
 </style>
 </head>
@@ -130,10 +131,11 @@
                 </div>
 		    
                 <div class="rating">
-                        <label for="rating">Rating  =&gt;</label>
+                        <label for="rating">Rating </label>
 	                
                     <select name="rating"
-                            class="rating">
+                            class="rating"
+                            style="font-size: 16pt;">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3"
