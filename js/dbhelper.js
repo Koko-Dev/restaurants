@@ -263,9 +263,9 @@ class DBHelper {
   }
   
   
-  /*
-   *   User Review Submission
-   * */
+  // User form Submission
+  // This is called from restaurant_info.js where we listen for a form submit event
+  //
   static reviewFormSubmission(reviewFormSubmissionData) {
     console.log(reviewFormSubmissionData); // shows user review submission
 
@@ -296,7 +296,7 @@ class DBHelper {
                         let store = tx.objectStore(reviewsObjectStore);
                         store.put(reviewFormSubmissionData);
                       })
-                  // console.log('[dbhelper.js -line 286]: rating', reviewFormSubmissionData.rating)
+                  // console.log('[dbhelper.js -line 299]: rating', reviewFormSubmissionData.rating)
                   return reviewFormSubmissionData;
                 })
       })

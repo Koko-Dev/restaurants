@@ -23,6 +23,7 @@ var cacheURLs = [
 ];
 
 
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(staticCacheName)
@@ -30,6 +31,8 @@ self.addEventListener('install', event => {
           .then(() => self.skipWaiting())
   )
 });
+
+
 
 self.addEventListener('activate', event => {
   // console.log("[Service Worker] At Activate Event", event);
@@ -77,6 +80,7 @@ self.addEventListener('fetch', event => {
 });
 
 
+
 // From Jake Archibald Wittr demo
 // https://github.com/jakearchibald/wittr
 self.addEventListener('message', event => {
@@ -85,6 +89,7 @@ self.addEventListener('message', event => {
     self.skipWaiting();
   }
 });
+
 
 
 self.addEventListener('sync', event => {
@@ -160,8 +165,6 @@ self.addEventListener('sync', event => {
         console.log('[SW-sync] - offlineStore failed: ', error);
       }
     }
-    
-    
     idbOpenDB.onerror = error => {
       console.log('[SW-sync] - idbOpenDB failed: ', error);
     }

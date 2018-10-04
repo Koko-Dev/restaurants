@@ -174,19 +174,37 @@ createReviewHTML = (review) => {
   return li;
 };
 
-// Add a event listener for a review submission
+// Add a event listener for a review submission linked to the user review form in restaurant.html
+// Links to #reviewForm
 let form = document.getElementById('reviewForm');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+  
+  // review => restaurant_id, user posted comment, name, rating, restaurant_id
+  // same as reviewFormSubmissionData from dbHelper.js 270
   let review = {'restaurant_id': self.restaurant.id};
+  
+  // review => restaurant_id, user posted comment, name, rating, restaurant_id
+  console.log('[restaurant_info.js]: review is restaurant_id: self.restaurant.id', review);
+  
+  // https://developer.mozilla.org/en-US/docs/Web/API/FormData/entries
+  // https://www.reddit.com/user/ryanplant-au
+  // Create a FormData object
   const formData = new FormData(form);
   
+  // Link key/value pairs for each entry in the formData
+  // https://stackoverflow.com/questions/25040479/formdata-created-from-an-existing-form-seems-empty-when-i-log-it
   for(let [k, v] of formData.entries()) {
     review[k] = v;
   }
+  
+  // Send the following as an argument
+  // review => restaurant_id, user posted comment, name, rating, restaurant_id
+  // same as reviewFormSubmissionData from dbHelper.js 270
   DBHelper.reviewFormSubmission(review)
           .then(data => {
+            // data =>  restaurant_id, user posted comment, name, rating, restaurant_id
             let ul = document.querySelector('#reviews-list');
             ul.appendChild(createReviewHTML(review));
             form.reset();
