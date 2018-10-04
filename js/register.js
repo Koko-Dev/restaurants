@@ -83,14 +83,17 @@ navigator.serviceWorker.ready.then(swRegistration => {
   return swRegistration.sync.register('oneTimeSync');
 });
 
-function networkEnabled() {
-  console.log('[register.js] - Testing Network Enable');
+// When the user is online or connectivity is restored,
+//    submit any user reviews that were posted while the user was offline
+// https://medium.com/@MateMarschalko/online-and-offline-events-with-javascript-d424bec8f43
+window.addEventListener('online', event => {
+  console.log('You are now back online!');
+  
+  // Check to see if User posted any offline reviews by checking offline-review store
   DBHelper.offlineReviewSubmission();
-}
+});
 
-function networkDisabled() {
-  console.log('[register.js] - Testing Network Disable');
-}
+window.addEventListener('offline', event => {
+  console.log('Lost connection but user can still post a review with confidence!');
+});
 
-window.addEventListener('online', networkEnabled);
-window.addEventListener('offline', networkDisabled);

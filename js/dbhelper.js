@@ -3,6 +3,7 @@ if (typeof idb === "undefined") {
   self.importScripts('js/idb.js');
 }
 
+
 // Restaurant Database Name
 const dbName = 'restaurant-database';
 
@@ -11,6 +12,8 @@ const dbObjectStore = 'restaurants';
 
 // Nave of restaurant-database reviews object store
 const reviewsObjectStore = 'reviews';
+
+
 
 /**
  * Common database helper functions.
@@ -24,6 +27,7 @@ class DBHelper {
     const port = 1337; // Change this to your server port
     return `http://localhost:${port}/`;
   }
+  
   
   /**
    * open cache
@@ -54,6 +58,7 @@ class DBHelper {
     });
     return dbPromise;
   }
+  
   
   /**
    * Fetch and cache all restaurants.
@@ -99,6 +104,7 @@ class DBHelper {
     });
   }
   
+  
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
@@ -115,6 +121,7 @@ class DBHelper {
     });
   }
   
+  
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
    */
@@ -130,6 +137,7 @@ class DBHelper {
       }
     });
   }
+  
   
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
@@ -156,6 +164,7 @@ class DBHelper {
     
   }
   
+  
   /**
    * Fetch all neighborhoods with proper error handling.
    */
@@ -173,6 +182,7 @@ class DBHelper {
       }
     });
   }
+  
   
   /**
    * Fetch all cuisines with proper error handling.
@@ -192,12 +202,14 @@ class DBHelper {
     });
   }
   
+  
   /**
    * Restaurant page URL.
    */
   static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
   }
+  
   
   /**
    * Restaurant image URL.
@@ -213,8 +225,8 @@ class DBHelper {
               if(!db) return;
       
               // Check indexedDB first for reviews
-              const tx = db.transaction('reviews');
-              let store = tx.objectStore('reviews');
+              const tx = db.transaction(reviewsObjectStore);
+              let store = tx.objectStore(reviewsObjectStore);
               store.getAll().then(theReviews => {
                 if(theReviews && theReviews.length > 0) {
                   // Use the reviews from indexedDB
@@ -231,8 +243,8 @@ class DBHelper {
                             if(!db) return;
                 
                             // Now that we have the Reviews from the Network, put in indexedDB
-                            const tx = db.transaction('reviews', 'readwrite');
-                            let store = tx.objectStore('reviews');
+                            const tx = db.transaction(reviewsObjectStore, 'readwrite');
+                            let store = tx.objectStore(reviewsObjectStore);
                 
                             reviews.forEach(networkReview => {
                               store.put(networkReview);
@@ -250,12 +262,14 @@ class DBHelper {
             })
   }
   
+  
   /*
    *   User Review Submission
    * */
   static reviewFormSubmission(reviewFormSubmissionData) {
     console.log(reviewFormSubmissionData); // shows user review submission
-    
+
+    // Post Endpoint to create new restaurant review: http://localhost:1337/reviews/
     return fetch(`${DBHelper.DATABASE_URL}reviews`, {
       body: JSON.stringify(reviewFormSubmissionData),
       method: 'POST',
@@ -275,24 +289,21 @@ class DBHelper {
                       .then(db => {
                         if(!db) return;
             
-                        // store the review form submission data in indexedDB
-                        // verified in reviews object Store and
-                        // stored by keyPath id position among total number of all time reviews
+                        // Store the online/offline review form submission data in reviews store
+                        // Stored by keyPath id position among total number of all time reviews
                         //  and Not in restaurant_id position for specific restaurant id
-                        const tx = db.transaction('reviews', 'readwrite');
-                        let store = tx.objectStore('reviews');
+                        const tx = db.transaction(reviewsObjectStore, 'readwrite');
+                        let store = tx.objectStore(reviewsObjectStore);
                         store.put(reviewFormSubmissionData);
                       })
-                  // console.log('dbhelper line 286 -- rating', reviewFormSubmissionData.rating)
+                  // console.log('[dbhelper.js -line 286]: rating', reviewFormSubmissionData.rating)
                   return reviewFormSubmissionData;
                 })
       })
       .catch(error => {
-        // We could not submit the review because we are offline
+        // We could not submit the review because we are currently offline
         // So we will store the review form submission data in offline-reviews object store
-        //   and will add the property updatedAt to the form submission data
-        
-        
+        //   and will add the property updatedAt to the form submission data with current time
         reviewFormSubmissionData['updatedAt'] = new Date().getTime();
         
         this.openIDB
@@ -303,13 +314,15 @@ class DBHelper {
               const tx = db.transaction('offline-reviews', 'readwrite');
               let store = tx.objectStore('offline-reviews');
               store.put(reviewFormSubmissionData);
-              console.log('We are offline, so will will store the user review in the offline-reviews object store');
+              console.log('[dbhelper.js: 306] -- We are offline, so we will store the user review in the offline-reviews object store');
             });
-        
         return reviewFormSubmissionData;
       })
   }
   
+  
+  
+  // Clear All user review posts that are stored in the offline-reviews store in indexedDB
   static clearAllOfflineReviews() {
     DBHelper.openIDB.then(db => {
       const tx = db.transaction('offline-reviews', 'readwrite');
@@ -318,6 +331,11 @@ class DBHelper {
     return;
   }
   
+  
+  
+  // This is called from (register.js)when the user re-establishes internet connection
+  // If there are reviews posted when the user was offline, each post will go to the
+  //     reviewFormSubmission function and the offline-reviews store will be cleared
   static offlineReviewSubmission() {
     DBHelper.openIDB
             .then(db => {
@@ -334,6 +352,8 @@ class DBHelper {
             })
   }
   
+  
+  
   /**
    * Map marker for a restaurant.
    */
@@ -347,6 +367,7 @@ class DBHelper {
     marker.addTo(newMap);
     return marker;
   }
+  
   
   
   // Ensures the favorites is Boolean to help with logic
@@ -386,6 +407,7 @@ class DBHelper {
             })
       })
   }
-} //  end DBHelper                               
+} //  end DBHelper
+
 
 self.DBHelper = DBHelper;
