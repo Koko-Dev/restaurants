@@ -1,4 +1,4 @@
-var staticCacheName = 'restaurants-191';
+var staticCacheName = 'restaurants-192';
 
 var cacheURLs = [
   '/',

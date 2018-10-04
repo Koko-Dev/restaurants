@@ -119,29 +119,33 @@
 	    
 	    <form id="reviewForm" role="form">
 
-        <h3 style="font-size: 17pt;">Add your own review</h3>
+        <h3 style="font-size: 17pt;" tabindex="0">Add your own review</h3>
 		    
                 <div style="font-size: 16pt;">
-                    <label for="name">Name</label>
+                    <label for="name" tabindex="0">Name</label>
                     <input id="name"
                            name="name"
                            placeholder="Name"
                            required=""
-                           type="text">
+                           type="text"
+                           aria-placeholder="Name"
+                           tabindex="0">
                 </div>
 		    
                 <div class="rating">
-                        <label for="rating">Rating </label>
+                        <label for="rating" tabindex="0">Rating </label>
 	                
                     <select name="rating"
                             class="rating"
-                            style="font-size: 16pt;">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                            style="font-size: 16pt;"
+                            tabindex="0">
+                        <option value="1" tabindex="0">1</option>
+                        <option value="2" tabindex="0">2</option>
                         <option value="3"
-                                selected="selected">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                                selected="selected"
+                                tabindex="0">3</option>
+                        <option value="4" tabindex="0">4</option>
+                        <option value="5" tabindex="0">5</option>
                     </select>
                 </div>
 		    
@@ -149,7 +153,12 @@
                     <textarea rows="6"
                               name="comments"
                               placeholder="Add your own Review here."
-                              required=""></textarea>
+                              contenteditable="true"
+                              aria-multiline="true"
+                              aria-placeholder="Add your own Review here"
+                              aria-required="true"
+                              required=""
+                              tabindex="0"></textarea>
                 </div>
 		    
                 <div class="button">
@@ -163,7 +172,8 @@
                            class="f"
                            value="Submit Review"
                            type="submit"
-                           role="button">
+                           role="button"
+                           tabindex="0">
                      <br><br>
                 </div>
             </form>
