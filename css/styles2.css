@@ -64,8 +64,8 @@ section {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; }
+  -ms-flex-direction: column;
+  flex-direction: column; }
 
 #footer {
   background-color: #444;
@@ -77,7 +77,7 @@ section {
   text-transform: uppercase; }
 
 #footer a {
-    color: #ee9611;
+  color: #ee9611;
 }
 
 /* ====================== Navigation ====================== */
@@ -136,8 +136,8 @@ nav h1 a {
   width: 100%;
   background-color: #124264;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  -ms-flex-align: center;
+  align-items: center; }
 
 .filter-options h2 {
   color: white;
@@ -176,13 +176,13 @@ nav h1 a {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+  flex-wrap: wrap; }
 
 #restaurants-list li {
   background-color: #fff;
@@ -276,8 +276,7 @@ nav h1 a {
   text-align: center;
   text-transform: uppercase; }
 
-#restaurant-container,
-#reviews-container {
+#restaurant-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
   padding: 10px 40px 30px;
@@ -294,41 +293,41 @@ nav h1 a {
   padding-bottom: 1pt; }
 
 .favorite-heart {
-    display: flex;
-    align-content: center;
-    padding: 20px;
-    text-align: center;
+  display: flex;
+  align-content: center;
+  padding: 20px;
+  text-align: center;
 }
 
 /* Heart: https://emojipedia.org/heavy-black-heart/ */
 .favButton {
-    align-self: flex-start;
-    font-size: 42px;
-    width: 100%;
-    background: #ffffff;
-    /*border: 1px solid #666666;*/
-    color: #180d00;
-    text-align: center;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
+  align-self: flex-start;
+  font-size: 42px;
+  width: 100%;
+  background: #ffffff;
+  /*border: 1px solid #666666;*/
+  color: #180d00;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 }
 .favButton:hover,
 .favButton:focus{
-    background-color: #cccccc;
+  background-color: #cccccc;
 }
 
 .isFavorite {
-    color: #88060b;
-    background-color: #fde9f1;
+  color: #88060b;
+  background-color: #fde9f1;
 }
 .isNotFavorite {
-    color: black;
-    background-color: #ffffff;
+  color: black;
+  background-color: #ffffff;
 }
 
 #reviews-container {
-    width: 100%;
+  width: 100%;
 }
 
 #reviews-list {
@@ -352,3 +351,6 @@ nav h1 a {
 
 #restaurant-hours td {
   color: #666; }
+
+
+
