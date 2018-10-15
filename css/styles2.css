@@ -68,7 +68,8 @@ section {
   flex-direction: column; }
 
 #footer {
-  background-color: #444;
+  /*background-color: #444;*/
+  background-color: #124264;
   color: #ccc;
   font-size: 14px;
   letter-spacing: 1px;
@@ -77,13 +78,13 @@ section {
   text-transform: uppercase; }
 
 #footer a {
-  color: #ee9611;
+  color: #ffffff;
 }
 
 /* ====================== Navigation ====================== */
 nav {
   width: 100%;
-  background-color: #21242c;
+  background-color: #124264;
   text-align: center; }
 
 nav h1 {

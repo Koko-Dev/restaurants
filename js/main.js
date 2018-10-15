@@ -205,7 +205,7 @@ createRestaurantHTML = (restaurant) => {
     window.location = url;
   };
   more.style.color = "#fff";
-  more.style.backgroundColor = '#bf780d';
+  more.style.backgroundColor = '#124264';
   more.style.padding = '10px 15px 10px 15px';
   more.style.fontSize = "1.5em";
   more.style.marginTop = '1em';
